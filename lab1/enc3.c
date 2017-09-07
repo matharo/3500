@@ -8,12 +8,15 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
-   char* key;
-   int mode;
-   int fd; //input file
-   int ofd; //output file
+   char key;
+   char data[3217784];
+   unsigned datalen;
+   unsigned mode;
+   int fd;
+   int ofd;
    int error_flag=0;
-   int count; //number of characters in file
+   long count; 
+
 
    if(strlen(argv[1])!=8) {
        printf("Key should contain only 8 characters");
@@ -43,27 +46,21 @@ int main(int argc, char *argv[]) {
       close(ofd);
       exit(error_flag);
     }
-    
-    
-
-
-    char msg[1024];
-    unsigned msglen;
 
     fd = open(argv[2],O_RDONLY);
-    msglen = read(fd, msg, 1024);
+    datalen = read(fd, data, 3217784);
 
     key = argv[1];
     des_setparity(key);
 
     if (mode == 0) {
-        ecb_crypt(key, msg,msglen, DES_ENCRYPT);
+        ecb_crypt(key, data, datalen, DES_ENCRYPT);
     }
     if (mode == 1) {
-        ecb_crypt(key, msg, msglen,  DES_DECRYPT);
+        ecb_crypt(key, data, datalen,  DES_DECRYPT);
     }
 
-    write(ofd, msg,msglen);
+    write(ofd, data,datalen);
     close(ofd);
     close(fd);
 
