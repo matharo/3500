@@ -7,7 +7,7 @@
 char linString[] = "Linux!";
 int  linSize = 6;
 
-char *winString = "Windows!\0";
+char *winString = "Windows!";
 
 int  winSize = 8;
 
@@ -24,21 +24,23 @@ int main ( int argc, char* argv[] ){
 	printf("%c\n", *(winString + 1));
 	printf("%c\n", *(winString + 2));
 	printf("%c\npointer arithmetic\n", *(winString + 3));
+	//separates number 7 and 8
+
 
 	for (i = 0; i < 8; i++)
 	{ printf("%c\n",*(winString + i)); }
 
 
-//number9 help
+//number9
 	for (i = 0; i < 8; i++)
-        { printf("%s\n",*(winString+i)); }
+        { printf("%s\n",(winString+i)); }
 
 	*linString = 'M';
 	printf("%s\n",linString);
 	
-//number11 help
+//number11
 	*winString = 'T';
-	printf("%s\n",*winString);
+	printf("%s\n",winString);
 
 	return 0;
 }
