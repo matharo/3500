@@ -1,0 +1,37 @@
+1. Lorna Xiao
+Studio 3, Pointers
+
+2.  printf("%s\n", linString);
+    printf("%s\n", winString);
+	
+3. 
+
+4.  int i;
+    for (i = 0; i < linSize; i++)
+    { printf("%c\n", linString[i]); }
+	
+5. It points to the very first character inside the winString, which is W.
+
+6. W was printed out
+
+7. I is stored after the first character of winString. 
+
+8.  for (i = 0; i < 8; i++)
+    { printf("%c\n",*(winString + i)); }
+	
+9. The output prints everything after each pointer arithmetic value.
+Windows!
+indows!
+ndows!
+dows!
+ows!
+ws!
+s!
+!
+
+10. Minux!
+
+11. I get a segmentation fault error because the pointer is a read-only memory and I cannot change parts of what it holds. 
+
+12. When I rerun the program, the winString text is changed to Solaris! and Solaris! is printed out.
+
