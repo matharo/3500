@@ -1,0 +1,32 @@
+﻿
+September 1, 2017
+
+Studio 2 Answers
+
+
+
+2) It copies each line of text when you hit enter
+
+3) It copied everything inside the file to the terminal
+
+
+4) we wrote into a file on the terminal
+
+
+5) It basically did the same thing as ‘>’
+
+
+6) read() - #include <unistd.h>
+   write() - #include <unistd.h>
+
+
+8) On success, the number of bytes read is returned and zero indicates end of the file. The return value type is int.
+
+
+9) The behavior matches up until the buffer value/ size whereas cat reads the entire file.
+
+10) By increasing the buffer size will affect the correctness of the program. If the buffer size is very small, then little information is printed to the terminal. The bufferSize = 10 gave an output of Retrieved . With size 2 only Re was outputted. For size 15000, the entire mars message was printed plus whatever was in memory due to buffer size being larger than the byte size. 
+
+
+11) Small buffer size doesn’t provide the entire text and is very limited whereas a large buffer size gives unnecessary data from memory. 
+
