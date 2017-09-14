@@ -1,6 +1,6 @@
-//Lorna Xiao and Vyshnavee Reddlapalli
-//Sep 8 2017
-//Error Checking
+// Lorna Xiao and Vyshnavee Reddlapalli
+// 9/8/17
+// Studio 4: Error Checking
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -8,27 +8,23 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 
-#define buffer_size 200
-int main(int argc, char* argv[])
-{
+#define buffer_size 1571
+int main(int argc, char* argv[]) {
 	int fd;
 	int textLen;
-	int text; 
+	int text;
 	char buffer[buffer_size];
-
-	fd = open(argv[1],O_RDONLY);
-
-	if (fd==-1) {
-		perror("error opening file\n");
-		printf("errno = %d\n",errno);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1) {
+		perror("Error opening file!\n");
+		printf("errno = %d\n", errno);
 		exit(1);
 	}
-
-	while((text = read(fd,buffer,buffer_size)!=0)){
-		write(STDOUT_FILENO,buffer,buffer_size);
-		
+	while((text = read(fd, buffer, buffer_size) != 0)) {
+		write(STDOUT_FILENO, buffer, buffer_size);
 	}
-	close (fd);
-	return 0;
+return 0;
 }
+
