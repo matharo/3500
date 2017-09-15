@@ -19,7 +19,7 @@ I am the child 12987
 
 6. The child pid gets printed much later than the parent which is unexpected (though makes sense because of sleep()), but the child's pid is still 1 more than the parent's (parent pid = 13131, child pid = 13132) which does make sense because the child process was still running the entire time. 
 
-7. The program executes just like it did when we added sleep(3)
+7. The program executes just like it did when we added sleep(3) except the paren is printed after the child.
 
 8. 
 total 10
@@ -28,11 +28,14 @@ total 10
 -rw-r--r--. 1 lornaxiao student  396 Sep 13 18:07 fork.c
 -rw-r--r--. 1 lornaxiao student   34 Sep 13 17:32 Makefile
 
-9.  
-I am the parent 14673
-[lornaxiao@hopper studio5]$ I am the child 14674
+9. make
+gcc fork.c -o fork
+./fork
+I am the child 12565
 total 10
--rwxr-xr-x. 1 lornaxiao student 8776 Sep 13 18:17 fork
--rw-r--r--. 1 lornaxiao student  994 Sep 13 18:12 ForkAndExecAns.txt
--rw-r--r--. 1 lornaxiao student  591 Sep 13 18:17 fork.c
--rw-r--r--. 1 lornaxiao student   34 Sep 13 17:32 Makefile
+-rwxr-xr-x 1 lornaxiao student 8424 Sep 15 13:31 fork
+-rw-r--r-- 1 lornaxiao student 1359 Sep 15 13:31 ForkAndExecAns.txt
+-rw-r--r-- 1 lornaxiao student  606 Sep 15 13:29 fork.c
+-rw-r--r-- 1 lornaxiao student   34 Sep 13 17:32 Makefile
+I am the parent 12564
+  

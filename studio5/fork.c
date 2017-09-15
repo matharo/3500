@@ -3,6 +3,7 @@
 //Fork and Exec studio5
 
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <stdio.h>
 int main(int argc, char* argv[])
@@ -21,7 +22,7 @@ int main(int argc, char* argv[])
                 execvp(child_prog,child_argv);
         }
 	else{
-		waitpid(child_PID,NULL,0);
+		waitpid(-1,NULL,0);
 		printf("I am the parent %d\n",parent_PID);
 	}
 	return 0;
