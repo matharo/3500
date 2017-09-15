@@ -1,0 +1,35 @@
+1) Vyshnavee Reddlapalli and Lorna Xiao
+
+3) When the argument specifies a file that doesn't exist, the open.c program prints infinite random characters that
+   needs to stopped using Control + c.
+
+4) When the program was executed on the perm.txt file, the program printed infinite number of random characters
+   instead of the contents in the text file.
+
+5) The program returns a -1 for open() in the event an error occurred. 
+
+6) fd = open(argv[1], O_RDONLY);
+        if (fd == -1) {
+
+7) perror("Error opening file!\n");
+   printf("errno = %d\n", errno);
+   exit(1); 
+
+9) When the argument to the program specified a file that doesn't exist, the perror() message was printed along
+   no such file or directory
+
+10) When the argument to the program specified a file without read or write permission such as the perm.txt, the 
+    perror() message was printed along with permission denied message 
+
+11) open(): -1 returned, function sets errno
+    close(): -1 returned, function sets errno
+    read(): -1 returned, function sets errno
+    write(): -1 returned, function sets errno
+    printf(): negative valus is returned
+
+12) Error checking in this manner helps identify errors quickly and help solve the specific errors in a fast manner
+ 
+
+
+
+
