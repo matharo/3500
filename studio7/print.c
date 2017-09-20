@@ -1,6 +1,4 @@
-//
-//
-
+//Lorna Xiao
 #include <stdio.h>
 #include <string.h>
 #define string_size 1024

@@ -1,0 +1,11 @@
+1. Lorna Xiao
+Pipes, studio7 
+includes files pipe.c, print.c, and infinite.c
+
+2. 
+Hello
+Hello
+my input
+Program 2 got: my input
+
+3. 
