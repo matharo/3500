@@ -1,5 +1,55 @@
-1. Lorna Xiao and Vyshnavee Reddlapalli
+1. Lorna Xiao
 September 17 2017
 Parsing String Input studio6
 
-2. 
+2.Enter input: hello
+Your input is: hello
+
+3. The first calls sets a pointer to the first byte in the string. The string it calls on should be specified for the first call, but for subsequent calls, the pointer to the first byte should be NULL. 
+
+4.  I would use a space or a comma as a delimiter
+
+5. 
+Enter input: hello
+Your input is: hello
+
+Each token: hello
+
+6. 
+Enter input: hello how are you
+Your input is: hello how are you
+
+Each token: hello
+Each token: how
+Each token: are
+Each token: you
+(new line here)
+
+7.  string[(strlen(userstring)-1)]=0;
+
+8. 
+
+9. cmd = strtok(input, " ");
+
+10.
+        int i;
+        cmd = strtok(input, " "); //first call
+        my_argv[0] = cmd;
+        printf("First token: %s\n", cmd);
+        for (i = 1; i < max_args; i++)
+        {
+                res = strtok(NULL, " ");
+                if (res == NULL) {		//if subsequent calls are null
+                        my_argv[i] = '\0';	//set next element to be null/end of all tokens
+                }
+                else {
+                        my_argv[i] = res;
+                        printf("Other tokens: %s\n",res);
+                }
+        } 
+
+11.
+Enter input: ls
+Your input is: ls
+First token: ls
+Makefile  parse  parse.c  ParseStrAns.txt 
