@@ -8,7 +8,6 @@ int main(int argc, char* argv[])
 	char* input;
 	while ((input=fgets(string,string_size,stdin))!= NULL){
 		printf("Program 2 got: %s\n",input);
-		printf("Enter text: ");
 	}
 	return 0;
 }

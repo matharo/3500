@@ -8,4 +8,29 @@ Hello
 my input
 Program 2 got: my input
 
-3. 
+3. pipefd[0] is the read end of the pipe. pipefd[1] is the write end of the pipe. 
+
+4. The second argument, newfd gets closed and returned when the dup2 function succeeds.
+
+5. 
+pid_t child_one = fork();
+        if (child_one == 0){
+                dup2(pipefd[1],STDOUT_FILENO);
+pid_t child_two = fork();
+        if (child_two == 0){
+                dup2(pipefd[0],STDIN_FILENO);
+
+6.  
+Program 2 got: Hello
+
+^Cmake: *** [all] Interrupt
+
+7. 
+Program 2 got: Hello
+
+[lornaxiao@hopper studio7]$ 
+
+8. Two advantages:
+	1. you do not need to create even more processes solely for specifically acting on a specific file/anything.
+	2. save data/space on the number of processes that are needed because a few general ones that can act on everything is the most efficient
+

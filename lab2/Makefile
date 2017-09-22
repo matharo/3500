@@ -1,3 +1,3 @@
 all:
-	gcc slush2.c -o slush
+	gcc slush6.c -o slush
 	./slush
