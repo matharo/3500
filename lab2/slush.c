@@ -1,38 +1,84 @@
-//Lorna Xiao and Vyshnavee Reddlapalli
-//Sep 19 2017
-//Lab 2 SLUSH - SLU Shell
-
-#include <stdio.h>
-#include <unistd.h>
 #include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdio.h>
 #include <string.h>
-#define string_size 8 
-
+#define string_size 256
+#define command_args 15
 int main(int argc, char* argv[])
 {
-	char string[string_size];
+	char userString[string_size];
+	char* input;
+	char* delim = " (";
+	char* commands[command_args];
 	char* str;
-	while (strlen(string) != 0)
+	while (1)
 	{
-		printf("Enter input: ");
-		fgets(string,string_size,stdin);
-		string[(strlen(string)-1)]=0;
-		if (strtok(string, " ( ")==NULL)
-		{
-			printf("Invalid null command\n");
+		printf("slush( ");
+		input = fgets(userString,string_size,stdin);
+		userString[(strlen(userString)-1)]=0;
 
+		if ((userString[0] || userString[(strlen(userString)-1)]) == *delim)
+		{
+			printf("Invalid syntax for %s\n", userString);
 		}
 
-
-		else
+		str = strtok(input, delim);
+		int count = 1;          //command counter, goes from 1 to 15
+		while(str!=NULL)
 		{
-			str = strtok(string, " ( ");
-			while (str!=NULL)
+			commands[count] = str;
+			str = strtok(NULL,delim);
+			count++;
+		}
+		commandLine(count,commands);
+int commandLine(int count, char* commands[]){
+		pid_t child[command_args];
+		int ret;	//use to identify parent or children(ret = 0) ret = fork();
+		int pipefd[2];
+		int pipeFromLast;
+		pipe(pipefd);
+
+		int i;
+		for (i = count; i > 0; i--)	//count tells the number of args inputted
+		{
+			if (count ==2)		//
 			{
-				printf("token: %s\n",str);
-				str = strtok(NULL," ( ");
+				child[i] = fork();
+				if (child[i] == 0)
+				{
+					dup2(pipefd[1],STDOUT_FILENO);
+					close(pipefd[0]);
+					cmd = "./" + *commands[i];
+					char* myargv[] = {commands[i], '\0'};
+					ret = execvp(commands[i],myargv);
+					if (ret == -1)
+					{       perror("Error exec'ing\n");     }
+				}
+				else
+				{
+					child[i+1] = fork();
+					if (child[i] == 0){
+						dup2(pipefd[0],STDIN_FILENO);
+						close(pipefd[1]);
+						cmd = "./" + *commands[i];
+						char* myargv[] = {commands[i], '\0'};
+						ret = execvp(commands[i],myargv);
+						if (ret == -1)
+						{       perror("Error exec'ing\n");     }
+					}
+					else
+					{
+						waitpid(child[i],NULL,0);
+						waitpid(child[i+1],NULL,0);
+						close(pipefd[1]);
+						close(pipefd[0]);
+					}
+				}
 			}
+			commandLine(count-2,commands[count-2]);
 		}
+}
 	}
 	return 0;
 }
