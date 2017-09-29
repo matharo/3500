@@ -1,0 +1,131 @@
+1. Lorna Xiao
+Race Conditions, studio 10
+
+2.
+void* adder(void* args)
+{
+        int i = 0;
+        while (i < iterations)
+        {
+                race++;
+        }
+        return NULL;
+}
+void* subtractor(void* args)
+{
+        int i = 0;
+        while(i < iterations)
+        {
+                race--;
+        }
+        return NULL;
+}
+
+3. If I directly run these programs in the main, the program will just keep running until it reaches the 2 millionth -1 iteration. 
+
+4. If they were executed simultaneously by two threads, the same would happen; they both would keep running until the last iteration (2 millionth -1, since it starts at 0). The value would end up being 0 because there is an equal number of additions and subtractions that do not matter what order they go in.
+
+5. The result is race = 0
+(I changed the # of iterations from 2 mil to 10)
+
+execution 1:
+Race #0 in adder: 0
+Race #1 in adder: 1
+Race #2 in adder: 2
+Race #3 in adder: 3
+Race #4 in adder: 4
+Race #5 in adder: 5
+Race #6 in adder: 6
+Race #7 in adder: 7
+Race #8 in adder: 8
+Race #9 in adder: 9
+Race #0 in subtractor: 0
+Race #1 in subtractor: 9
+Race #2 in subtractor: 8
+Race #3 in subtractor: 7
+Race #4 in subtractor: 6
+Race #5 in subtractor: 5
+Race #6 in subtractor: 4
+Race #7 in subtractor: 3
+Race #8 in subtractor: 2
+Race #9 in subtractor: 1
+The final result of race is: 0
+
+execution 2:
+Race #0 in adder: 0
+Race #1 in adder: 1
+Race #2 in adder: 2
+Race #3 in adder: 3
+Race #4 in adder: 4
+Race #5 in adder: 5
+Race #6 in adder: 6
+Race #0 in subtractor: 0
+Race #1 in subtractor: 6
+Race #2 in subtractor: 5
+Race #3 in subtractor: 4
+Race #4 in subtractor: 3
+Race #5 in subtractor: 2
+Race #6 in subtractor: 1
+Race #7 in subtractor: 0
+Race #8 in subtractor: -1
+Race #9 in subtractor: -2
+Race #7 in adder: 7
+Race #8 in adder: -2
+Race #9 in adder: -1
+The final result of race is: 0
+
+execution #3: 
+Race #0 in adder: 0
+Race #1 in adder: 1
+Race #0 in subtractor: 0
+Race #1 in subtractor: 1
+Race #2 in subtractor: 0
+Race #3 in subtractor: -1
+Race #4 in subtractor: -2
+Race #5 in subtractor: -3
+Race #6 in subtractor: -4
+Race #7 in subtractor: -5
+Race #8 in subtractor: -6
+Race #9 in subtractor: -7
+Race #2 in adder: 2
+Race #3 in adder: -7
+Race #4 in adder: -6
+Race #5 in adder: -5
+Race #6 in adder: -4
+Race #7 in adder: -3
+Race #8 in adder: -2
+Race #9 in adder: -1
+The final result of race is: 0
+
+execution #4:
+Race #0 in subtractor: 0
+Race #1 in subtractor: -1
+Race #2 in subtractor: -2
+Race #3 in subtractor: -3
+Race #4 in subtractor: -4
+Race #5 in subtractor: -5
+Race #6 in subtractor: -6
+Race #7 in subtractor: -7
+Race #8 in subtractor: -8
+Race #9 in subtractor: -9
+Race #0 in adder: 0
+Race #1 in adder: -9
+Race #2 in adder: -8
+Race #3 in adder: -7
+Race #4 in adder: -6
+Race #5 in adder: -5
+Race #6 in adder: -4
+Race #7 in adder: -3
+Race #8 in adder: -2
+Race #9 in adder: -1
+The final result of race is: 0
+
+6. The maximum is 9 and the minumum is -9. The program often will run the code as its is written (top down) but occasionally the order will be interrupted and the subtractor will execute or the subtractor will be called before adder.
+
+7. The program still exhibits this behavior, just not as obviously so when the amount of iterations decreases. Just like how I did 10 iterations, took a lot of executions to find executions that did not go in order of the code, top down. The more iterations, the more often will the code execute in differing orders since we cannot control the order it executes.
+
+8. Yes, it can still exhibit race conditions because the processor will still stop and switch threads to execute the code.
+
+9. The program loops between iterating subtractor and adder and pauses when it switches between threads. 
+
+10. The race # for the adders and # for the subtractors were different in that subtractor x would stop at -1400 and adder y would start up after that at 2000, which clearly shows there is a race condition because the processor is switching between threads, which both will execute code at different paces. There being only one processor just means that the processor will have to switch threads and recall the race value at where it stopped at.

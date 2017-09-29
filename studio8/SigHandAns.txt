@@ -1,0 +1,37 @@
+1. Lorna Xiao
+Signal Handling, studio 8
+
+2. 
+Sleeper's PID is: 32326
+Slept for 0 iterations!
+Slept for 1 iterations!
+Slept for 2 iterations!
+Slept for 3 iterations!
+Slept for 4 iterations!
+Slept for 5 iterations!
+Slept for 6 iterations!
+Slept for 7 iterations!
+
+3. SIGINT's numerical value is 2. Associated comment: interrupt from the keyboard
+
+4. The process is interrupted just like when it is interrupted by ^C
+
+5. I picked 11, SIGSEGV, which gave me a segmentation fault.
+make: *** [all] Segmentation fault (core dumped)
+
+6. Both stopped; the program did not print out its success message.
+
+7. 
+void sig_hand(int signum)
+{
+        printf("Ignoring SIGINT...");
+}
+
+ signal(2,sig_hand);
+
+8. Ignoring SIGINT...Parent finished waiting and returned successfully!
+
+9. Another situation where signal handling would be useful is Alt+F4 can close the window or CTRL+ALT+F4 that signals to prompt the shutdown window to pop up, and once you click "yes" or "shutdown", the computer will start to shutdown all programs and turn off.
+
+Enrichment Exercises:
+1. In the terminal, CTRL-C does the same behavior as when you press enter, it stops what is running currently (the terminal) and then it makes another one opened. This is important because it resets the whatever is currently going on in the terminal at that instance and resets when it creates the new instance.

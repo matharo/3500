@@ -1,0 +1,77 @@
+1. Lorna Xiao
+Studio 9, Threads
+
+2. pthread_create returns type int. the void *(*start_routine) returns a start_routine().
+
+3. 
+void *thread_entry(void *threadIdentifier)
+{
+        printf("Hello World. Greetings from thread %d\n",threadIdentifier);
+        pthread_exit(NULL);
+}
+
+4.
+Main func. Creating thread 0
+Hello World. Greetings from thread 0
+
+5. 
+#define NUM_THREADS 10;
+
+struct el_struct{
+        int arg1;
+        char arg2[NUM_THREADS];
+        int ret;
+}
+--thread_entry here---
+int main(int argc, char* argv[])
+{
+        pthread_t thread;
+
+        struct el_struct st;
+        st.arg1 = 5;
+        st.arg2 = "arg2"
+
+        struct el_struct *ptr = &st;
+        ptr->arg1 = 5
+        ptr->arg2 = "arg2"
+	--- continues ---
+}
+
+6. 7. 
+Main func. Creating thread -203344624
+thread arg1: 5
+thread arg2: arg2
+thread ret: 10
+Hello World. Greetings from thread -203344896
+
+8. 
+Main func. Creating thread 4195904
+thread arg1: 0
+thread arg2: This is thread 0
+
+thread ret: 807429217
+Hello World. Greetings from thread 1946207376
+thread arg1: 10
+thread arg2: This is thread 1
+
+thread ret: 824206433
+Hello World. Greetings from thread 1946207396
+thread arg1: 1946157066
+thread arg2: This is thread 2
+
+thread ret: 840983649
+Hello World. Greetings from thread 1946207416
+thread arg1: 10
+thread arg2: This is thread 3
+
+thread ret: 857760865
+Hello World. Greetings from thread 1946207436
+thread arg1: 1946157066
+thread arg2: This is thread 4
+
+thread ret: 874538081
+Hello World. Greetings from thread 1946207456
+thread arg1: 10
+thread arg2: This is thread 5
+
+9. The thread numbers each increase by 20. I think this is because each statement of code end up taking a total of 20 lines/steps to complete, so thats why the threads are ordered that way and incremented by 20.   

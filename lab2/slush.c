@@ -31,12 +31,11 @@ int main(int argc, char* argv[])
 			str = strtok(NULL,delim);
 			count++;
 		}
-		commandLine(count,commands);
-int commandLine(int count, char* commands[]){
 		pid_t child[command_args];
 		int ret;	//use to identify parent or children(ret = 0) ret = fork();
 		int pipefd[2];
 		int pipeFromLast;
+		char* cmd;
 		pipe(pipefd);
 
 		int i;
@@ -58,12 +57,12 @@ int commandLine(int count, char* commands[]){
 				else
 				{
 					child[i+1] = fork();
-					if (child[i] == 0){
+					if (child[i+1] == 0){
 						dup2(pipefd[0],STDIN_FILENO);
 						close(pipefd[1]);
 						cmd = "./" + *commands[i];
-						char* myargv[] = {commands[i], '\0'};
-						ret = execvp(commands[i],myargv);
+						char* myargv[] = {commands[i+1], '\0'};
+						ret = execvp(commands[i+1],myargv);
 						if (ret == -1)
 						{       perror("Error exec'ing\n");     }
 					}
@@ -76,9 +75,8 @@ int commandLine(int count, char* commands[]){
 					}
 				}
 			}
-			commandLine(count-2,commands[count-2]);
 		}
-}
+
 	}
 	return 0;
 }
