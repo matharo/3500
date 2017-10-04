@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#define iterations 200000000	//2hundred mil iterations
+#define iterations 20000000
 int race;
 
 void* adder(void* args)
@@ -12,25 +12,25 @@ void* adder(void* args)
 	int i = 0;
 	while (i < iterations)
 	{
-		printf("Race #%d in adder: %d\n",i,race);
+		//printf("Race #%d in adder: %d\n",i,race);
 		race++;
 		i++;
 	}
-	return NULL;
+	return args;
 }
 void* subtractor(void* args)
 {
 	int i = 0;
 	while(i < iterations)
 	{
-		printf("Race #%d in subtractor: %d\n",i,race);
+		//printf("Race #%d in subtractor: %d\n",i,race);
 		race--;
 		i++;
 	}
-	return NULL;
+	return args; 
 }
 
-int main(int argc, char argv)
+int main(int argc, char* argv[])
 {
 	pthread_t thread1;
 	pthread_t thread2;

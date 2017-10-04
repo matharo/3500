@@ -1,0 +1,120 @@
+1. Lorna Xiao
+Studio 12, Atomics
+
+2. _sync_add_and_fetch() function: adds and fetches from the pointer, returns a new value
+
+3. 
+atom before = 0
+atom after = 1
+
+4. I tested using 200 iterations, there is no race condition. For 10 iters, the output is:
+atom before = 0
+atom after = 1
+Add iter #0 race = 1
+Add iter #1 race = 2
+Add iter #2 race = 3
+Add iter #3 race = 4
+Add iter #4 race = 5
+Add iter #5 race = 6
+Add iter #6 race = 7
+Add iter #7 race = 8
+Add iter #8 race = 9
+Add iter #9 race = 10
+Sub iter #0 race = 9
+Sub iter #1 race = 8
+Sub iter #2 race = 7
+Sub iter #3 race = 6
+Sub iter #4 race = 5
+Sub iter #5 race = 4
+Sub iter #6 race = 3
+Sub iter #7 race = 2
+Sub iter #8 race = 1
+Sub iter #9 race = 0
+The final result of race is: 0
+
+5. Atomics runtime without printing, 20mill lock/unlocks
+take 1:
+atom before = 0
+atom after = 1
+The final result of race is: 0
+
+real	0m2.312s
+user	0m1.518s
+sys	0m0.071s
+
+take 2:
+atom before = 0
+atom after = 1
+The final result of race is: 0
+
+real	0m2.332s
+user	0m1.521s
+sys	0m0.049s
+
+take 3:
+atom before = 0
+atom after = 1
+The final result of race is: 0
+
+real	0m2.311s
+user	0m1.524s
+sys	0m0.072s
+
+Average:	atomics runtime without printing, 20 mill lock/unlock
+real 	0m2.318s
+user	0m1.521s
+sys	0m0.064s
+
+The average time for the mutexes with lock/unlock 20 mill times was:
+Average:
+real    0m11.638s
+user    0m10.207s
+sys     0m0.398s
+
+6.
+Based on the previous answer (the 2 averages) atomics is clearly much faster than the mutex.
+
+7. The atomics instruction is faster than mutex by:
+real 9.32s	5 times faster
+user 8.686s	6.7 times faster
+sys .334s	6.2 times faster
+
+8.
+Race program (without mutexes), 20 million iters
+take 1:
+The final result of race is: -5894923
+real    0m0.354s
+user    0m0.491s
+sys     0m0.023s
+
+take 2:
+The final result of race is: -10080669
+real    0m0.328s
+user    0m0.469s
+sys     0m0.020s
+
+take 3:
+The final result of race is: -9018164
+real    0m0.343s
+user    0m0.483s
+sys     0m0.017s 
+
+average for race program (20 iters, no mutex)
+real 	0m0.342s
+user	0m0.481s
+sys	0m0.002s
+
+and the time for atomics with 20 iters (number 5)
+real    0m2.318s
+user    0m1.521s
+sys     0m0.064s
+
+it takes atomics to run longer than race by:
+real	6.7 times slower
+user	3.1 times slower
+sys	32 times slower
+
+9.
+mutex would be better when there needs to be multiple operations done within the lock in one thread. requires one thread to act at a time, so an example would be when Windows is updating, only that thread is running and nothing else can run.
+
+atomic would be better for single operations that do not need to be divided up since i+=1 can get divided into 3 assembly lines. thus atomic operations actually do not need to use mutexes because it keeps all operations together, so the _and_add call just adds without using multiple lines. it would be useful for gathering data/changing data without worrying multiple threads possibly corrupting data and not have to use a mutex. so one Google Chrome tab can refresh while the others do not

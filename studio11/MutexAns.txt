@@ -4,3 +4,155 @@ Mutex, studio 11
 2. pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 3.
+
+4. If I synchronize the accesses, there will be data corruption because the two threads may access the same variables without knowing at the same time. The numeric value can range between the negative iteration amount and the positive iteration amount, each +/- 1 because it includes 0. This will decrease the amount of time run because the two threads can run at the same time except the result may be incorrect.
+ 
+5. The program is supposed to do the adder first and then the subtractor. However, sometimes it will do subtractor first before adder. But it does not stop partially in between when computing adder or subtractor
+
+Run 1
+Race #0 in adder: 0
+Race #1 in adder: 1
+Race #2 in adder: 2
+Race #3 in adder: 3
+Race #4 in adder: 4
+Race #5 in adder: 5
+Race #6 in adder: 6
+Race #7 in adder: 7
+Race #8 in adder: 8
+Race #9 in adder: 9
+Race #0 in subtractor: 10
+Race #1 in subtractor: 9
+Race #2 in subtractor: 8
+Race #3 in subtractor: 7
+Race #4 in subtractor: 6
+Race #5 in subtractor: 5
+Race #6 in subtractor: 4
+Race #7 in subtractor: 3
+Race #8 in subtractor: 2
+Race #9 in subtractor: 1
+The final result of race is: 0
+
+Run 2
+Race #0 in subtractor: 0
+Race #1 in subtractor: -1
+Race #2 in subtractor: -2
+Race #3 in subtractor: -3
+Race #4 in subtractor: -4
+Race #5 in subtractor: -5
+Race #6 in subtractor: -6
+Race #7 in subtractor: -7
+Race #8 in subtractor: -8
+Race #9 in subtractor: -9
+Race #0 in adder: -10
+Race #1 in adder: -9
+Race #2 in adder: -8
+Race #3 in adder: -7
+Race #4 in adder: -6
+Race #5 in adder: -5
+Race #6 in adder: -4
+Race #7 in adder: -3
+Race #8 in adder: -2
+Race #9 in adder: -1
+The final result of race is: 0
+
+6.
+Studio 10 race program
+Race doesn't always equal 0 because of data corruptions. I timed it without printing out race each iteration.
+
+take 1:
+The final result of race is: 493913
+
+real	0m0.200s
+user	0m0.186s
+sys	0m0.012s
+ 
+take 2:
+The final result of race is: 2064153
+
+real	0m0.297s
+user	0m0.195s
+sys	0m0.007s
+
+take 3:
+The final result of race is: -2002488
+
+real	0m0.272s
+user	0m0.190s
+sys	0m0.013s
+
+Average:
+real	0m0.256s
+user 	0m0.190s
+sys	0m0.010s
+
+7. 
+Studio 11 race program with mutexes, lock/unlock 20 million times
+
+take 1:
+The final result of race is: 0
+
+real	0m11.278s
+user	0m10.137s
+sys	0m0.388s
+
+take 2:
+The final result of race is: 0
+
+real	0m11.827s
+user	0m10.256s
+sys	0m0.428s
+
+take 3:
+The final result of race is: 0
+
+real	0m11.808s
+user	0m10.229s
+sys	0m0.378s
+
+Average:
+real	0m11.638s
+user	0m10.207s
+sys	0m0.398s
+
+Compared to studio 10:
+real is slower by 11.382s
+user is slower by 10.017s
+sys is slower by .388s
+
+8. 
+Studio 11 race program with mutexes, lock/unlock only 1 time each thread
+
+take 1:
+The final result of race is: 0
+
+real	0m1.577s
+user	0m1.055s
+sys	0m0.012s
+
+take 2:
+The final result of race is: 0
+
+real	0m1.193s
+user	0m1.052s
+sys	0m0.010s
+
+take 3:
+The final result of race is: 0
+
+real	0m1.493s
+user	0m1.056s
+sys	0m0.012s
+
+Average:
+real	0m1.431s
+user	0m1.054s
+sys	0m0.011s
+
+It is slower than the original race program from studio 10 by:
+real  1.175s
+user  0.864s
+sys   0.001s
+
+9. The timing increased because it takes time to lock and unlock the mutex. Whereas in studio10, we did not have to lock/unlock the mutex.
+
+10. An example involving locking per iteration would be updating data in a variable that cannot have other threads having access to it at the same time. I found on stackoverflow and example of using the phone at the phone booth. Many people can enter and leave the phone booth (if they fit), but only one person can have access to the phone at a time. 
