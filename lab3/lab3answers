@@ -1,0 +1,95 @@
+1) Vyshnavee Reddlapalli and Lorna Xiao
+
+2) Password is: pass
+
+3) Password is: ferry
+
+4) Thread 1:
+   real	  2m47.109s
+   user	  2m47.106s
+   sys	  0m0.003s
+
+5) Thread 2:
+   real	  1m24.712s
+   user	  2m48.132s
+   sys	  0m0.004s
+   Thread 4:
+   real	  0m40.701s
+   user	  2m39.453s
+   sys	  0m0.005s
+   Thread 8:
+   real	  0m22.217s
+   user	  2m52.184s
+   sys	  0m0.009s
+   Thread 13:
+   real	  0m14.730s
+   user	  2m53.609s
+   sys	  0m0.011s
+   Thread 26:
+   real	  0m9.432s
+   user	  3m40.615s
+   sys	  0m0.006s
+
+6) Hash Rate = (26^5)/execution time
+   Thread 2: (11881376)/(84s) ~= 14144.9 hashes/s
+   Thread 4: (11881376)/(40s) ~= 297034.4 hashes/s
+   Thread 8: (11881376)/(22s) ~= 540062.5 hashes/s
+   Thread 13: (11881376)/(14s) ~= 848669.7 hashes/s
+   Thread 26: (11881376)/(9s) ~= 1320152.8 hashes/s
+
+8) When the hash rate was calculated for thread 1 and compared with the hash rates
+   of the other threads, we could see a pattern in the hash rate. From the hash rate
+   of thread 1 if we multiple the rate by 2 it was pretty close of the hash rate of 
+   thread 2, similarly it was the pattern for the other threads as well. Hash rate 1
+   times 8 is similar to the hash rate 8 and so forth.
+
+9) The maximum hash rate we recorded was approximately 1320152.8 hashes/sec
+
+10) Number of hashes
+    Keysize 1: 26
+    Keysize 2: 676
+    Keysize 3: 17576
+    Keysize 4: 456976
+    Keysize 5: 11881376
+    Keysize 6: 308915776
+    Keysize 7: 8031810176
+    Keysize 8: 2.08827*10^11
+
+11) Keysize 7: ~6084s
+    Keysize 8: ~158184s
+    The benefit to having a longer keysize provides significanlty many hashes which
+    provides many possibilities for hashes essentially making it difficult to crack
+    the password.
+
+12) 52 + 62 + 93 = 207
+    number of hashes = 207^6 = 7.86723*10^13
+    ~= 59593359s 
+
+13) No known bugs and no deviation from specifications in our program
+
+14) Extra Credit 1, 2, and 3 were attempted
+
+Extra Credit 1:
+Password is: salts
+Password is: salts
+Password is: salts
+Password is: salts
+Password is: salts
+Password is: donot
+Password is: skipp
+Password is: anyyy
+Password is: salts
+
+Extra Credit 2:
+Password salts are beneficial because it adds a whole new level of required
+computational power in order to expose the hash. Hashing a password is not
+completely secure because it is not too difficult to rehash and crack the
+password. Therefore adding a salt, any useful lookup tables become useless and
+salts are unique and personalized to the user and thier password. So password 
+salts are useful even if they are not secret.
+
+Extra Credit 3:
+Incorporated in the crack program where tying ASCII as the forth argument
+parameter will cause the program to go through the decimal values of 32-122
+in the ASCII table to search all uppercase and lowercase, numbers and 
+symbols.
