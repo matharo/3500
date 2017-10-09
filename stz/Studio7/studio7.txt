@@ -1,0 +1,41 @@
+1. Tanmayi Nagasuri and Alex Lambrecht
+
+
+int main(int argc, char* argv[]) {
+        char buffer[] = "Hello, world!\n";
+        write(STDOUT_FILENO, buffer, 14);
+
+        char buf[100];
+        char* ab;
+        printf("Enter a string: ");
+        ab = fgets(buf, 100, stdin);
+        while(ab!=NULL){
+                printf("Program 2 got: %s\n", ab);
+                printf("Enter a string: ");
+                ab = fgets(buf, 100, stdin);
+                
+        }
+
+2.
+Hello, world!
+Enter a string: g
+Program 2 got: g
+
+Enter a string: g
+Program 2 got: g
+
+3. fd[0] read end; fd[1] write end
+
+4. newfd
+
+5. 
+dup2(fd[1],STDOUT_FILENO);
+dup2(fd[0],STDIN_FILENO);
+
+6. Enter a string: Program 2 got: Hello, world!
+
+7. Enter a string: Program 2 got: Hello, world! 
+
+8. User does not need to worry about correctly accessing source of data. Another advantage to stream ambiguity is that there is less chance for
+entire program to crash just because one program does not know where its data is from. 
+ 

@@ -1,0 +1,21 @@
+1. Lorna Xiao
+studio 13, OpenMP
+
+2. 
+Enter number, (quit -1): 7
+7 is prime
+Enter number, (quit -1): 23
+23 is prime
+Enter number, (quit -1): 101
+101 is prime
+Enter number, (quit -1): 982451653
+982451653 is prime
+
+3.
+982451653 is prime
+
+real    0m0.082s
+user    0m0.037s
+sys     0m0.016s
+
+4. 

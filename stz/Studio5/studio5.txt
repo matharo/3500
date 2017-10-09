@@ -1,0 +1,32 @@
+1. Tanmayi Nagasuri and Alex Lambrecht
+
+2. PID 35317
+PID 35362
+PID 35363
+
+3. PID 35687
+PID 35688
+get two different outputs
+
+4. PID of the child process is returned in parent; 0 is returned in the child. 
+
+5. 
+This is the parent. My pid is 14618
+This is the child. My pid is 14619 and my parent's pid is 14618
+
+6. Yes. It prints out the parent pid first, and after 3 seconds prints out the child pid. 
+
+7. They both print out simultaneously as they wait for the second oen to finish. 
+
+8. 
+This is the child. My pid is 19394 and my parent's pid is 19393
+total 7
+-rwxr-xr-x. 1 nagasurit student 8832 Feb 24 09:29 studio5
+-rw-r--r--. 1 nagasurit student  523 Feb 24 09:29 studio5.c
+
+9. 
+This is the child. My pid is 19394 and my parent's pid is 19393
+total 7
+-rwxr-xr-x. 1 nagasurit student 8832 Feb 24 09:29 studio5
+-rw-r--r--. 1 nagasurit student  523 Feb 24 09:29 studio5.c
+This is the parent. My pid is 19393

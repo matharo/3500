@@ -1,0 +1,37 @@
+Studio12 
+
+1. Tanmayi Nagasuri and Alex Lambrecht
+
+2. The function returns the new value. This takes a pointer and a value.
+
+3. 
+Before: 0
+After: 1
+
+4. 
+-11147337
+0
+
+5. 
+real    0m0.988s
+user    0m1.965s
+sys     0m0.001s
+
+real    0m0.857s
+user    0m1.629s
+sys     0m0.003s
+
+real    0m0.904s
+user    0m1.769s
+sys     0m0.003s
+
+Average: 0.916s
+
+6. Atomic instruction is more efficient.
+
+7. Atomic instructions are more efficient by about 3 times. 
+
+8. The atomic instructions were about 4x slower. 
+
+9. Mutex locking is preferable when there are shared variables. Atomic instructions are preferable when time is important because
+we want faster programs and we also only have a few threads. 
