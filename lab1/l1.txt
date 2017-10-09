@@ -1,0 +1,17 @@
+1. Alex Lambrecht
+
+2. 0m0.235s
+
+3. ghairkfh 
+8: 0m0.683s
+80: 0m0.190s
+800: 0m0.147s
+4096: 0m0.124s
+
+4. It is faster to make a few system calls that read meany characters
+because in order to do system calls, you need a control transfer from user 
+space to kernel space. In orer to do that, you need an interrupt. This interrupt will
+transfer control to kernel. With fewer system calls, there are fewer interrupts,
+so it is faster. 
+
+5. None
