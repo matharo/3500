@@ -1,0 +1,64 @@
+1. Lorna Xiao
+Open MP part 2, studio 14
+
+2. part of output, num = 25
+i 2 exe thread 0
+i 3 exe thread 0
+i 4 exe thread 0
+i 5 exe thread 0
+i 6 exe thread 0
+i 7 exe thread 1
+i 8 exe thread 1
+i 9 exe thread 1
+i 10 exe thread 1
+i 11 exe thread 1
+i 17 exe thread 3
+i 18 exe thread 3
+i 19 exe thread 3
+i 20 exe thread 3
+i 21 exe thread 3
+i 22 exe thread 4
+i 23 exe thread 4
+i 24 exe thread 4
+i 25 exe thread 4
+i 12 exe thread 2
+i 13 exe thread 2
+i 14 exe thread 2
+i 15 exe thread 2
+i 16 exe thread 2
+
+3. 
+num = 25
+max threads 40
+
+4. max threads 5
+
+5. around 5, the least is 4 because of the uneven number
+
+6. it will be bad when there are _a lot_ of iterations for each thread; it would be better to use more threads
+
+7. the iterations where i <= 4 took longer than everything else
+with sleep			5 threads
+real    0m3.089s
+user    0m0.041s
+sys     0m0.023s
+
+without sleep			5 threads
+real    0m0.112s
+user    0m0.169s
+sys     0m0.045s 
+
+8. 5 threads, dynamic 1
+with sleep
+real    0m1.079s
+user    0m0.035s
+sys     0m0.021s
+
+without sleep
+real    0m0.084s
+user    0m0.033s
+sys     0m0.020s
+
+9. each thread no longer receive an equal amount of iterations. one thread dominates and takes more iterations
+
+10. it specifies how many iterations the dominant thread should have, and when it reaches that amount, a 2nd dominant thread takes that many iterations
