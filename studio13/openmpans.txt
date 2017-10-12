@@ -1,0 +1,58 @@
+1. Lorna Xiao
+studio 13, OpenMP
+
+NOTE: need to change the file name in Makefile to
+ll.c and print.c when comparing the two
+
+func.c = checks primality with a function
+print.c = prints all primes
+ll.c (two letter l's) = parallel
+
+2. 
+Enter number, (quit -1): 7
+7 is prime
+Enter number, (quit -1): 23
+23 is prime
+Enter number, (quit -1): 101
+101 is prime
+Enter number, (quit -1): 982451653
+982451653 is prime
+
+3.
+982451653 is prime		//I am not sure why, I even compared my code to others, but I can never get anywhere near .005s, it is always .070 or more. I even got rid of the for loop and just used if statements but it was still slow.
+
+real    0m0.082s
+user    0m0.037s
+sys     0m0.016s
+
+4. 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 
+100 composite
+
+5. Each number is logically independent because primality checks each number once and returns 0 or 1. Each number can be done independently without worrying what result is returend. 
+
+6. Testing 7 and 9 is not independent from testing 5 because if the number is not divisble by 5, then it will not be tested for 7 and 9.
+
+7. yes but the ordering is different
+
+8. 
+Parallel runtime: 1mill
+real    0m0.420s
+user    0m0.368s
+sys     0m0.021s
+
+Sequential runtime: 1mill
+real    0m0.557s
+user    0m13.441s
+sys     0m0.015s
+
+Parallel 20mill
+real    0m19.264s
+user    8m52.827s
+sys     0m0.048s
+
+Sequential 20mill
+real    0m20.706s
+user    0m20.630s
+sys     0m0.025s
+
+9. You can write code for what you would usually write for OpenMP and just add the parallel and omp code and still get accurate results. For Pthreads, you need to create multiple threads and you may need to add mutexes so the results will be correct.

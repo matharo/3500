@@ -1,3 +1,4 @@
 all:
-	gcc m.c -o open -lm
-	./open
+	gcc print.c -o ll  
+	./ll
+
