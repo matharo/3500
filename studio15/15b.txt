@@ -1,0 +1,21 @@
+1. Lorna Xiao
+studio 15b - paging
+
+2. it has 262144 page frames (each 2^18 bytes) with each page size 4kb
+
+3. 6 bytes 
+
+since a 32bit can have 1 million pages and 64bit has way more than 1 million, then a 48 bit address can hold the median of the two amount of pages. 
+
+4. resides in page 3, offset is 2308 because page starts at 8192 bytes so offset is 10500 mod 8192
+ 
+5. 0x43904 hex
+
+6. 3750000 page faults, because 15gb = 15000000, and there are 4kb pages
+
+7. 468750 page faults 
+
+8. small pages: smaller programs can run faster and not have an excess amount of memory allocated for them.
+large pages: you can run larger programs without having to divide them up and put them in separate parts of memory 
+
+9. moving data from the computer disk to memory takes 2^1 bytes less to move from disk to memory

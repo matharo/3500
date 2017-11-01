@@ -1,0 +1,28 @@
+1. Lorna Xiao
+studio 16	page tables
+
+2. there are 262144 page frames
+
+3. 1048576 page frames 
+
+4. the system will have to call on the OS for more memory which will eat into the memory that contains the OS, so the system will indeed crash
+
+5. the max would be the answer in number 3 because theoretically the max number would be however many pages there are which is on the virtual memory 
+
+6. 4mb because assuming each page is 4bytes, 2^32/2^12 * 4 = 4mb, 4096kb
+
+7. 4kb pages, 1 GB of ram for - bits of virtual address 32-bit to specify page number
+
+8. 20 bits specifies page number. 12 bits are the offset --of a 32 bit virtual address
+
+9. physical address will contain 30 bits
+
+10. 18 bits
+
+11. 18 bits = page frame, 12 bits = offset
+
+12. page 0000
+13. page 0010 and page 0101
+14. 8 bits in virtual address, 7.5 bits in physical address
+15. 101110001111000
+16. 01011110000111 
