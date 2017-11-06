@@ -1,0 +1,14 @@
+1. Lorna Xiao
+studio 18, page replacement
+
+2. the minimum is 8 page faults; not considering any algorithm: 10page faults
+3. clarivoyant: 8 page faults
+4. FIFO: 11 page faults
+5. LRU: 11 page faults
+6. use LRU and NRU
+7. it's advantageous because it reduces the number of page faults by putting the same pages near or close to each other especially when they generated page faults without the rearrangement 
+8. 9 page faults
+9. 10 page faults
+10. the result unexpected because you would assume having more page frames would allow you to reduce the number of faults but using the FIFO algorithm in addition to the order of the pages actually increases the number of faults--the non page faults for 3 page frames occured in the 4 page frame with in turn actually increased the faults
+11. should consider the number of faults in even and odd number of page frames to determine if there are unexpected anomalies that may increase page faults
+

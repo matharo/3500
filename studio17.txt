@@ -4,13 +4,16 @@ TLB studio 17
 2. no
 3. yes
 4. page 0101 will be evicted next because it has not been referenced before
-5. 01100000100001 - read , 00110000010101 - write, 00100000111011 - read
+5. 	00010001000010 - write
+	00100000111011 - read
+	00110000101110 - read
+
 6. it spends 300,000 cycles on misses, and 90,000 cycles on hits. it spends 390,000 total cycles on memory accesses
 7. 3.9 cycles average number of cycles
 8. 290,000 total cycles, 2.9 average number of cycles per access
 9. since this is an alternative, the miss still uses 30 cycles:
-	total cycles is 119,000. average is 1.19 cycles per access
+	total cycles is 129,000. average is 1.29 cycles per access
 10. the 2nd alternative is better because you reduce the percentage of misses, which overall will reduce the total cycles and average cycles
-the 2nd is better by: 171000 cycles, by 1.71 average cycles
+the 2nd is better by: 161000 cycles, by 1.61 average cycles
 option 1 is 2.43 times worse than option 2 -- total and average cycles
 on the other sense, option 2 is 40% better than option 1
