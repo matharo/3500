@@ -1,0 +1,65 @@
+1.Lorna Xiao
+studio 19, Files
+
+2. -rw-r--r--
+read and write
+
+3. file size is 1
+4. 0000000: 5468 6973 2069 7320 7468 6520 6265 6769  This is the begi
+0000010: 6e6e 696e 6720 6f66 2074 6865 2074 6573  nning of the tes
+0000020: 7420 6669 6c65 2e0a 5468 6973 2069 7320  t file..This is 
+0000030: 6120 7465 7374 2066 696c 652e 0a54 6869  a test file..Thi
+0000040: 7320 6973 2061 2074 6573 7420 6669 6c65  s is a test file
+0000050: 2e0a 5468 6973 2069 7320 6120 7465 7374  ..This is a test
+0000060: 2066 696c 652e 0a54 6869 7320 6973 2061   file..This is a
+0000070: 2074 6573 7420 6669 6c65 2e0a 5468 6973   test file..This
+0000080: 2069 7320 6120 7465 7374 2066 696c 652e   is a test file.
+0000090: 0a54 6869 7320 6973 2061 2074 6573 7420  .This is a test 
+00000a0: 6669 6c65 2e0a 5468 6973 2069 7320 6120  file..This is a 
+00000b0: 7465 7374 2066 696c 652e 0a54 6869 7320  test file..This 
+00000c0: 6973 2061 2074 6573 7420 6669 6c65 2e0a  is a test file..
+00000d0: 5468 6973 2069 7320 6120 7465 7374 2066  This is a test f
+00000e0: 696c 652e 0a54 6869 7320 6973 2061 2074  ile..This is a t
+00000f0: 6573 7420 6669 6c65 2e0a 5468 6973 2069  est file..This i
+0000100: 7320 6120 7465 7374 2066 696c 652e 0a54  s a test file..T
+0000110: 6869 7320 6973 2074 6865 2065 6e64 206f  his is the end o
+0000120: 6620 7468 6520 7465 7374 2066 696c 652e  f the test file.
+0000130: 0a                                       .
+
+
+5. Files that have ASCII text all end with 0a
+Text files generally start with a 5--- bit at the beginning 00000000: 5--- or 6---
+
+6. the newline character is not printed out
+
+7. 7f45 
+
+8. 
+0000230: 0100 0000 0000 0000 2f6c 6962 3634 2f6c  ......../lib64/l
+0000240: 642d 6c69 6e75 782d 7838 362d 3634 2e73  d-linux-x86-64.s
+0000250: 6f2e 3200 0400 0000 1000 0000 0100 0000  o.2.............
+0000260: 474e 5500 0000 0000 0200 0000 0600 0000  GNU.............
+//////////This is a GNU library
+
+0000310: 0000 0000 0000 0000 006c 6962 632e 736f  .........libc.so
+0000320: 2e36 0070 7574 7300 5f5f 6c69 6263 5f73  .6.puts.__libc_s
+0000330: 7461 7274 5f6d 6169 6e00 5f5f 676d 6f6e  tart_main.__gmon
+0000340: 5f73 7461 7274 5f5f 0047 4c49 4243 5f32  _start__.GLIBC_2
+/////////Also a GNU library, possibly calling it
+
+9. 
+Class:                             ELF64	//////tells us that it is in the executable and linking format
+Entry point address:               0x400440 	//////tells where the file starts
+ Type:                              EXEC (Executable file)	//////tells what type of file this is
+
+10. 
+ [13] .text             PROGBITS         0000000000400440  00000440
+       0000000000000182  0000000000000000  AX       0     0     16
+
+offset is :00000440 
+
+
+11. 
+    60: 000000000040052d    27 FUNC    GLOBAL DEFAULT   13 main
+
+it resides at 000000000040052d 

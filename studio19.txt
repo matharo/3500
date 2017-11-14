@@ -1,0 +1,29 @@
+1. Lorna Xiao
+studio 20 File Systems
+
+2. 
+3. 2 chunks
+4. 2 chunks out of 10 total possible chunks
+	2/10 = 20%
+	if out of 20, there are 4 frags so 4/20 = 20%
+5.
+6. 1 chunk
+7. no because through the linked list allocation method, you can fill up those chunks easily
+8. 3 blocks must be read to find the 3500th byte of file A when each block is 1024 bytes
+
+9. ??
+
+10. 
+1KB (2^10, 1024 bytes) = 10485760 entries 
+4KB (2^12, 4096 bytes) = 2621440 entries
+8KB (2^13, 8192 bytes) = 1310720 entries
+
+11. if each entry were 3 bytes, FAT would be (in bytes):
+1KB = 31457280 bytes
+4KB = 7864320
+8KB = 3932160
+
+12. seek time = 10ms, block read time = 3ms, average file size = 2475 bytes
+1KB - 1024 bytes = 24.17 + 7.25 = 31.42 ms
+2KB - 2048 bytes = 12.08 + 3.63 = 15.71 ms
+4KB - 4096 bytes = 6.04 + 1.81 = 7.86 ms

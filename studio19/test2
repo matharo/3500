@@ -1,0 +1,9 @@
+Start of file.
+
+As the answer to the first exercise, list the names of the people who worked together on this studio.
+Files are the essential storage medium for data on a computer. Create an empty file using the touch command:
+touch test.txt
+
+Use the command "ls -l" to list all of the files in the current directory. What are the permissions on your new file?
+
+End of file.
