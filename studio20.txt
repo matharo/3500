@@ -11,7 +11,8 @@ studio 20 File Systems
 7. no because through the linked list allocation method, you can fill up those chunks easily
 8. 3 blocks must be read to find the 3500th byte of file A when each block is 1024 bytes
 
-9. ??
+9.
+E|E|B|B|D|D|E|E| | |D|D|D| | | | | | | | 
 
 10. 
 1KB (2^10, 1024 bytes) = 10485760 entries 
