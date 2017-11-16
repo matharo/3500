@@ -1,4 +1,41 @@
 1. Lorna Xiao
 studio 21 Intro to Networking
 
-2. 
+2.
+br0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 165.134.107.80  netmask 255.255.255.224  broadcast 165.134.107.95
+        inet6 fe80::ec4:7aff:fe54:51da  prefixlen 64  scopeid 0x20<link>
+        ether 0c:c4:7a:54:51:da  txqueuelen 1000  (Ethernet)
+        RX packets 634871740  bytes 577389967006 (537.7 GiB)
+        RX errors 0  dropped 3727  overruns 0  frame 0
+        TX packets 521568476  bytes 989527553417 (921.5 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+3. current IP addresses:
+165.134.107.80 and fe80::ec4:7aff:fe54:51da 
+
+4.  MAC/ethernet addresse: 
+0c:c4:7a:54:51:da
+
+5. host name: hopper.mcs.slu.edu
+
+6. it returns the address and IPv6 address it has, and the websites that site is handled by
+
+7. it has multiple addresses possibly because it has more than one network interface, one for each interface.
+	have both an IPv4 and IPv6 network address
+	but both addresses match to a single host name
+
+8. protocol from each traditional layer:
+layer 1 (physical) -- wifi : wifi is used for wirelses local area networking. it is on this layer because devices that want to use wifi technology have to have wireless adaptors that are internally built in to the computer 
+
+layer 2 (data link) -- MAC : medium access control, provides flow control for the physical link. it is here so it tells what the physical parts of the device what to do 
+
+layer 3 (network) -- IPv6 : a communication protocol that provides identification and location systems for computers on networks and routes traffic across the itnernet. this is on this layer to connect the application to other applications and devices
+
+layer 4 (transport) -- TCP : transmission control protocol provides reliable, ordered, and error-checked delivery of a stream between applications running on hosts communciating by an IP network. this allows the apps and devices to actually transmit information across each other
+
+layer 5 (session) -- PAP : password authentification protocol is a weak authentication scheme that tramsits unencrypted passwords over the network. this is on this layer because it controls each session/time that the device is using for how long and controls the length of time data is being sent. 
+
+layer 6 (presentation) -- TLS : transport layers ecurity are cryptographic protocols that provide comunications security over a network (ex. email, web browsing, messaging, VOIP). this is in this layer to secure the communications between applications and servers so that it cannot be seen by everyone. 
+
+layer 7 (application) -- BitTorrent : a communication protocol for peer-to-peer file sharing to distribute data and electronic files over the internet. it is most commonly used for transmitting large files. this is on this layer because this is what the application does and what it is actually sending over on the internet. 
