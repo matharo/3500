@@ -1,4 +1,22 @@
 1. Lorna Xiao
 studio 22 physical and data-link layer
 
-2. 
+2. you send 9 bits in total, 8 bits for the message and 1 to include the parity bit
+
+3. 
+000011110 0-parity bit
+111011001 1-parity biy
+111111110 0-parity bit
+000000000 0-parity bit
+
+4. if a single bit is flipped, assuming if you have an odd number of 1s and 0s, it will be even and the parity bit method will need to be flipped. the method will catch errors because the parity sent will be the oppsite to what is received. 
+
+5. it will not catch errors if 2 bits are flipped because if 2 bits are flipped when there are an odd number of 0s and 1s, then it will still be odd when +2 either 1 or 0. same for the evens. the parity bit sent is the same received, even though 2 bits were flipped
+
+6. it detects an error when the parity that is sent does not match up with the parity that is received on the toher side. it fails when there are an odd number of 1 bits received = even number of bits get flipped
+
+7. 20 bits overhead ethernet frame
+
+8. 138 bits of overall transmission, 22/138 = 15.9% is overhead
+
+9. 1538 bits of overal transmission, 22/1538 = 1.4% overhead
