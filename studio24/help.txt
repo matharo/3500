@@ -1,0 +1,36 @@
+man 2 bind example
+	path "sockHandle"
+	bind -> creates special file
+		call *unlink
+	bind address
+	create structure
+	1. #include <sys/un.h>
+	2. struct sun_address
+	3. zero struct -> memset
+	4. fillout fields 
+		unix domain
+		strncpy port into struct 
+	ip domain
+	stringcp ip into struct, assign port htons()
+
+server:
+1. create socket()
+2. bind() address
+	struct *sun_address = unix socket
+	for lab = sin_address = internet socket
+
+	look in man 7 unix, man 7 ip
+3. listen()
+4. accept() wait for connecting
+
+////////
+
+client:
+1. socket()
+2. connect()
+	requires own address struct
+3. write(filename)
+
+////////
+
+

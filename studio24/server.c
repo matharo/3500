@@ -38,18 +38,18 @@ int main()
     //keep at most 10 connection requests waiting
     //11th one will fail
     listen(listen_fd, 10);
- 
+    printf("Listening for connections....\n"); 
     //accept connection, if no connections to accept, wait
     //file descriptor is returned, can be used to communicate
     //whatever is sent by device accepted can be read from comm_fd
     //whatever written to comm_fd is sent to other device
     comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
- 
+    //printf("Found a connection with: %s\n",comm_fd); 
+    
     while(1)
     {
         bzero( str, 100);	//clears str
         read(comm_fd,str,100);	//read up to 100 bytes into str
-
 //	unlink(str);
         printf("Echoing back - %s",str); 	//display what is read
         write(comm_fd, str, strlen(str)+1);	//send back str
