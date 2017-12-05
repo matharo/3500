@@ -1,0 +1,23 @@
+#copy.c
+
+1. Tanmayi Nagasuri and Alex Lambrecht
+
+2. The console displays what was just written in each line.
+
+3. It displays the text file in the console. 
+
+4. Whatever was typed into the console appears in the text file.
+
+5. Whatever is typed into the console is added on to the contents of the text file.
+
+6. #include <unistd.c>
+
+7. blank
+
+8. int is returned. If end of file, then 0 is returned
+
+9. Yes
+
+10. It can add extra symbols at the end.
+
+11. There will be a larger run time.

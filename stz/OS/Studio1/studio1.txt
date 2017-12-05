@@ -1,0 +1,18 @@
+1. Tanmayi Nagasuri, Alex Lambrecht
+
+2. include <stdio.h>
+include <stdarg.h>
+3. printf has char, and fprintf has file stream 
+4. printf writes the output to the standard output stream and fprintf
+writes output to the given output stream
+
+5. Hello, world!
+6. 2
+7. man 2 write
+#include <unistd.h>
+8.
+9. #st.c
+Hello, world! 
+10. If the buffer size is too large, then extra symbols appear at the 
+end of the intended output. This could be because the buffer is reading more than however many bytes are available
+and so there are extra symbols appearing.  

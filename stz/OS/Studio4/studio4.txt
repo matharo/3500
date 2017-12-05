@@ -1,0 +1,69 @@
+1. Tanmayi Nagasuri and Alex Lambrecht
+
+2. 
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+
+#define bufferSize 1000
+
+int main( int argc, char* argv[] ){
+        char buffer [bufferSize];
+
+        char* readFile = argv[1];
+        //printf(readFile);
+        int openReadFile;
+        int readIn;
+        openReadFile = open(readFile, O_RDWR);
+        readIn = read(openReadFile, buffer, bufferSize);
+                                                              1,18          Top
+		while(readIn != 0) {
+                write(STDOUT_FILENO, buffer, readIn);
+                if(readIn == 0) {break;}
+                readIn = read(openReadFile, buffer, bufferSize);
+        }
+	return 0;
+}
+
+
+3. The program gets stuck and has to be terminated. 
+
+4. The program gets stuck and has to be terminated.
+
+5. -1
+
+6. if (openReadFile == -1) {
+                
+                
+7. perror("There was an error opening the read file\n");
+
+8. 
+
+9. There was an error opening the read file
+:No such file or directory
+
+10. There was an error opening the read file
+: Permission denied
+
+11. 
+open: -1 if error; yes
+close: -1 if error; yes;
+read: -1 if error; yes
+write: -1 if error; yes
+printf: negative value if error; no
+
+12. This lets the developer know what the type of error is and how to correct it easily. 
+The program will not quit or crash.  
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
-//Lorna Xiaoq
-//Studio 24, server.c
-//Received source and code from https://vcansimplify.wordpress.com/2013/03/14/c-socket-tutorial-echo-server/
+//Lorna Xiao
+//Studio 25
+//Received and modified code from https://vcansimplify.wordpress.com/2013/03/14/c-socket-tutorial-echo-server/
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -11,27 +11,28 @@
  
 int main()
 {
- 
     char str[100];
     int listen_fd, client_fd;	//listen is for server
-
+    socklen_t addr_size;
     //struct to hold ip address and port numbers
     struct sockaddr_in servaddr;
-
+    struct sockaddr_storage servstorage;
     //creates socket, of type sock-strema, all devices wanting
     //to connect to this socket will redirect to listen_fd
     listen_fd = socket(AF_INET, SOCK_STREAM, 0);
  
     //clear
-    bzero( &servaddr, sizeof(servaddr));
+    //bzero( &servaddr, sizeof(servaddr));
  
     //set addressing scheme
     servaddr.sin_family = AF_INET;
+    //listen on this port 7891
+    servaddr.sin_port = htons(7891);
     //allow any ip to connect
-    servaddr.sin_addr.s_addr = htons(INADDR_ANY);
-    //listen on port 22000
-    servaddr.sin_port = htons(22000);
- 
+    servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    //memset(servaddr.sin_zero,'\0',sizeof servaddr.sin_zero);
+    bzero(&servaddr,sizeof(servaddr);
+
     //listen to connections from address/port specified in sockaddr
     if (bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr)) == -1){
 	    perror("Unable to bind\n");
@@ -53,14 +54,13 @@ int main()
     	//whatever is sent by device accepted can be read from comm_fd
     	//whatever written to comm_fd is sent to other device
     	client_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
-    	//printf("Found a connection with: %s\n",comm_fd); 
+    	//printf("Found a connection with: %s\n",comm_fd);
     }
-
     while(1)
     {
-        bzero( str, 100);	//clears str
-        read(client_fd,str,100);	//read up to 100 bytes into str
+        bzero( str, 100);			//clears str
+        read(client_fd,str,100);		//read up to 100 bytes into str
         printf("Echoing back - %s",str); 	//display what is read
         write(client_fd, str, strlen(str)+1);	//send back str
-   }
+    }
 }

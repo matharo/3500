@@ -1,0 +1,61 @@
+1. Tanmayi Nagasuri and Alex Lambrecht
+
+2. 
+flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 165.134.107.80  netmask 255.255.255.224  broadcast 165.134.107.95
+        inet6 fe80::ec4:7aff:fe54:51da  prefixlen 64  scopeid 0x20<link>
+        ether 0c:c4:7a:54:51:da  txqueuelen 1000  (Ethernet)
+        RX packets 171738387  bytes 140594956170 (130.9 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 119495814  bytes 528545529502 (492.2 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+3. 
+inet 165.134.107.80
+inet6 fe80::ec4:7aff:fe54:51da
+
+4. ether 0c:c4:7a:54:51:da
+
+5. hopper.mcs.slu.edu
+
+6. 
+google.com has address 172.217.4.238
+google.com has IPv6 address 2607:f8b0:4009:801::200e
+google.com mail is handled by 10 aspmx.l.google.com.
+google.com mail is handled by 20 alt1.aspmx.l.google.com.
+google.com mail is handled by 30 alt2.aspmx.l.google.com.
+google.com mail is handled by 50 alt4.aspmx.l.google.com.
+google.com mail is handled by 40 alt3.aspmx.l.google.com.
+
+It returns IP addresses. Also gives different domain hosts.
+
+7. It is useful to have multiple IP addresses to one host name for high level load balancing. slu.edu gets a lot of traffic and 
+this will be able to handle heavy traffic. 
+
+8. 
+Physical layer: USB - this defines the cables and connectors used in a bus for connection and communication between 
+computers. This is physical because it is physical organization and uses no software and is merely a way to 
+help with communication. 
+
+Data Link layer: CDP is a protocol that is used to share information about other 
+directly connected equipment. This is something that shares data between two devices 
+and is not the physical component. 
+
+Network layer: Connectionless-mode Network Service (CLNS) can transmit data 
+without requiring a circuit. This routes messages to the destination without 
+depending on other messages. Because it communicates with other computer networks, 
+it is considered part of the network layer. 
+
+Transport Layer: AppleTalk Echo Protocol (AEP) is networking protocols which allow 
+local networks to be connected with no setup or router or server. This transmits data without any centralized 
+servers and does not rely solely on the network. 
+
+Session Layer: Network Basic Input/Output System (NetBIOS) allows applications 
+on separate computers to communicate over a local area network. 
+
+Presentation Layer: Transport Layer Security (TLS) provides communications 
+security over a computer network. This secure all communications between their servers and web browsers. 
+
+Application Layer: Bootstrap Protocol (BOOTP) is used to assign AP addresses 
+to network devices from a configuration servers. This works for applications because when applications are turned on 
+then it can request for an IP address. 

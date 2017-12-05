@@ -1,0 +1,56 @@
+1. Tanmayi Nagasuri and Alex Lambrecht
+
+2. 
+File F - 3 blocks
+Free 2 blocks
+File E - 4 blocks
+Free 2 blocks
+File D - 5 blocks 
+Free 4 blocks
+
+3. 2 chunks 
+
+4. 4/20 = 20%
+
+5. E E B B D D empty empty E E D D D 
+
+6. 1 chunk 
+
+7. No because there should be no fragmentation in a linked list allocation. 
+
+8. It is necessary to read 4 blocks.
+1024
+2048
+3072
+block contains 3500th byte
+
+9. FAT
+0	1
+1	6
+2	3
+3	null
+4	5
+5	10
+6	7
+7	null
+8	null
+9	null
+10	11
+11	12
+12	null
+
+10. 
+
+1KB: 10 *2^30 / 2^10
+4KB: 10*2^30 / 4 *2^10
+8KB: 10*2^30 / 8*2^10
+
+11. 
+1KB: 3(10 *2^20)
+4KB: 3(2.5*2^20)
+8KB: 3(1.2*2^20)
+
+12. 
+1024: 39 microseconds
+2048: 10 + 3 + 10 + 3 = 26 microseconds
+4096: 10 + 3 = 13 = 13 microseconds

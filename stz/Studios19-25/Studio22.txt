@@ -1,0 +1,22 @@
+1. Tanmayi Nagasuri and Alex Lambrecht
+
+2. 9 bits
+
+3. 
+000011110
+111011001
+111111110
+000000000
+
+4. Flipping one bit will not catch all errors; this is will not match the parity bit. If one of the 8 bits is flipped, the parity 
+bit will not match, and if the parity bit is flipped, then it will not match. It will always catch error.
+
+5. Flipping two bits means that it may look right, but it does not match right. It will not always catch this error. 
+
+6. It will catch an error if an odd number of bits is flipped. It fails then. 
+
+7. 38 bytes
+
+8. 138 bytes long. 38/138 = 27.5% overhead 
+
+9. 1538 bytes long. 38/1538 = 2.47% overhead

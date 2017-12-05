@@ -1,0 +1,52 @@
+1. Code
+2. Code
+3. Listening
+Data received: Hello World
+
+4. 
+Server:
+
+Listening
+From client: hello
+
+From client: yes
+
+
+
+Client: 
+
+Data recieved: Server connected
+
+hello
+quit
+
+Data recieved: Server connected
+
+yes
+
+5. 
+Server:
+
+Listening
+From client: hello
+
+From client: quit
+
+From client: yes
+
+
+Client: 
+
+Data recieved: Server connected
+
+hello
+quit
+
+Data recieved: Server connected
+
+yes
+
+
+The code that is attached has been modified for Studio 25, but 
+all of Studio24 code was commented out and is still visible! 
+We got it working during your office hours. 

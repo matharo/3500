@@ -1,0 +1,33 @@
+1. Tanmayi Nagasuri and Alex Lambrecht
+
+2. read and write permissions
+
+3. 0
+
+4. 
+0000000: 4c6f 7265 6d20 4970 7375 6d20 6973 2073  Lorem Ipsum is s
+0000010: 696d 706c 7920 6475 6d6d 7920 7465 7874  imply dummy text
+0000020: 206f 6620 7468 6520 7072 696e 7469 6e67   of the printing
+0000030: 2061 6e64 2074 7970 6573 6574 7469 6e67   and typesetting
+0000040: 2069 6e64 7573 7472 792e 200a             industry. 
+
+5. there is nothing saved. 
+
+6. the newline character is not printed
+
+7. 7f45 4c46 02 01 01 00 00 00 00 00 00 00 00 00
+
+8. .ELF............
+The program output always starts with .ELF for the executable files. 
+This is could specify that this is an executable file and not an actual text file. 
+
+9. 
+ Type:                              EXEC (Executable file)
+ This states what type of file is being read. 
+ Size of this header:               64 (bytes)
+ This gives whether the ELF header should use 32-bit or 64-bit addresses.
+ 
+10. Entry point address:               0x400490
+
+11. 58: 0000000000400490     0 FUNC    GLOBAL DEFAULT   13 _start 
+	60: 000000000040057d    26 FUNC    GLOBAL DEFAULT   13 main

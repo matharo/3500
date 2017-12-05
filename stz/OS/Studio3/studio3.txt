@@ -1,0 +1,30 @@
+1. Tanmayi Nagasuri, Alex Lambrecht
+
+2. code
+
+3. make file 
+
+4. code
+
+5. W
+0
+
+6. W
+
+7. i
+W
+i
+n
+d
+
+8. code 
+
+9. Will print out string of characters until where pointer is each time.
+
+Printed out string of characters that was after pointer every time.
+
+10. Minix!
+
+11. It does not run.
+
+12. It prints out Solaris!

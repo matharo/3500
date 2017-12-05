@@ -1,0 +1,42 @@
+1. Tanmayi Nagasuri and Alex Lambrecht 
+
+2. The first three octets are constant, and the last octet can vary in the 
+above subnet range.
+
+3. 152.221.54.0/24
+
+4. 1001 1000 0100 1110 0110 this is the network address
+0101 0010 0011 this is the host identifier
+
+5. 165.134.0.0/16
+
+6. There are 16 bits in SLU's host identifier. 
+
+
+7. 0010 0110 1011 1111 1101 0000 0000 0000
+
+B 0010 0110 1011 1111 1101 1110 0010 1111
+
+8. 
+1100 1000 0110 0100 0011 0010 0001 1001
+
+A 1100 1000 XXXX....
+
+B 1100 1000 0110 XXXX...
+
+D 1100 1000 0110 0100 0011 00XX XXXX...
+
+9. 
+20.40.80.0/24 will be the longer match because the leftmost 24 bits remain constant 
+as opposed to only 16 in the other address. 
+
+10. 
+
+A. 11000000 10101000 00000001 Ethernet0
+
+B. 11000000 10101000 00000001 00011000 Ethernet1
+
+C. 11000000 10101000 00000001 00101111 Ethernet3
+
+D. Ethernet5
+

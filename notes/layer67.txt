@@ -1,0 +1,22 @@
+layer 6 and 7
+
+presentation layer:
+	formats data for transmission or after receiption
+		eg. compression, encryption, data formatting(ascii unicode)
+	suppose instead of sockets:
+	send OverNet(char* string)
+	{
+		encrypt(string)
+		compress(string)
+		write(socket,string)
+	}
+	recvFromNet()
+	{
+		read(socket,string)
+		decompress(string)
+		decrypt(string)
+		return string;
+	}
+
+application layer:
+	
