@@ -49,4 +49,4 @@ if (sfd == -1)
 
            /* When no longer required, the socket pathname, MY_SOCK_PATH
  *               should be deleted using unlink(2) or remove(3) */
-}
+

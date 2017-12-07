@@ -1,0 +1,60 @@
+Secure Systems
+
+can we build a 100% secure system?
+	in theory, yes
+	in practice, no
+
+IN THEORY:
+	formal verification
+		(input) -> (system) -> (output)
+		32 bit	   32 bit
+
+	for a stateless system
+		verify outputs are expected
+	for stateful system
+		output depends on size of system (32bits)
+		exponential explosion of combinations
+			can't just verify all 32bit input to system
+			also verify 32 bit states of system
+
+		2^32 input, 2^32 states, f(input,state) = (2^32)^(2^32)
+			4bill^4bill = computationally infeasible
+
+IN PRACTICE:
+	why not perfect security?
+	1. cost-to have feasible security: cost of security < value protected
+		tradeoff: no internet, verification of software, limit applications
+	2. features add vulnerability
+		eg. rich emails vs text only, UB scripts
+
+Trusted Computing Base
+	---------------------------------
+	|				|
+	|	(Process1)	(2)	|	userspace
+	|	     v		(3)	|
+	|-------------------------------|
+	|				|
+	| 	<-(monitor) ->		|	kernel
+	|	      v			|
+	---------------------------------
+
+	monitor code is trusted -> acts as gatekeeper
+				-> verifies actions that are executed by other code
+				-> security related stuff
+		eg. check permissions, modify policy
+			small, secure, verifiable
+
+Establish root of trust -> trust hardware we are executing on
+	hardware level: verification, quality control, buy trusted vendors
+	firmware/boot software: store hash of firmware, have special hardware,
+		unit hash + compare at boot
+	OS: save idea, hash checksum in kernel before running
+		if kernel fails process = someone tampered with it in a not approved way
+		
+	program goes through each level 1hardware 2firmwareboot 3os
+		no one has access to system unless authorized to do so
+		each level checks make sure
+		chain of trust, high->low level software, runningsoftware = intended to be running
+
+	
+		

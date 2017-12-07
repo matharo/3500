@@ -63,4 +63,4 @@ int main()
         printf("Echoing back - %s",str); 	//display what is read
         write(client_fd, str, strlen(str)+1);	//send back str
    }
-}
+

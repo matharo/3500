@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <arpa/inet.h>
+#include <pthread.h>
 
 void* reader(void* args){
   int sock = *(int*)args;
@@ -51,15 +52,15 @@ int main(int argc, char *argv[]){
     memset(&tosend, 0, sizeof(tosend));
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock<0){
-      perror("socket failed");
+      perror("socket failed\n");
       exit(1);
     }
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = inet_addr(ip);
     server.sin_port = htons(port);
     
-    if(connect(sock, (struct sockaddr *) &server,  sizeof(server)) < 0){
-      perror("connect failed");
+    if(connect(sock, (struct sockaddr *) &server,  sizeof(server)) == -1){
+      perror("connection failed\n");
       close(sock);
       exit(1);
     }
@@ -69,7 +70,7 @@ int main(int argc, char *argv[]){
     while(1){
       int got= read(STDIN_FILENO, buff, sizeof(buff));
       if( got == -1 ){
-	perror("couldn't read");
+	perror("couldn't read\n");
 	exit(-1);
       }
       memset(tosend, 0, sizeof(tosend));

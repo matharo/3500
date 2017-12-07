@@ -1,13 +1,15 @@
-// Aime Nunez and Deondre Strickland
-//May 4th, 2017
-
 #include <sys/socket.h>
+#include <sys/types.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <errno.h>
+#include <arpa/inet.h>
 #include <sys/un.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include<pthread.h>
-#define MY_SOCK_PATH "./local"
+//#define MY_SOCK_PATH "./local"
 #define LISTEN_BACKLOG 50
 #define USER_COUNT 100
 
@@ -82,38 +84,52 @@ void *handler(void *c) {
 
 int main(int argc, char *argv[]) {
 
-	unlink(MY_SOCK_PATH); // necessary when server does not properly finish
+	//unlink(MY_SOCK_PATH); // necessary when server does not properly finish
 	int sfd, cfd;
-	struct sockaddr_un my_addr, peer_addr;
+	
+	char* ip = argv[1];
+	int port = atoi(argv[2]);	
+
+	printf("IP is %s, Port is %d\n",ip,port);
+
+	struct sockaddr_in my_addr, peer_addr;
 	socklen_t peer_addr_size;
 	pthread_t threadArray[USER_COUNT];
 
 	// Initializing all userSlots as inactive
 	int counter;
-	for (counter = 0; counter < USER_COUNT; counter++) { structArray[counter].active = 0; }
+	for (counter = 0; counter < USER_COUNT; counter++) 
+		{ structArray[counter].active = 0; }
 	
 	// Creates socket
-	sfd = socket(AF_UNIX, SOCK_STREAM, 0);
+	sfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sfd == -1)
 		handle_error("socket");
 
-	// Clears structure
-	memset(&my_addr, 0, sizeof(struct sockaddr_un));
-	my_addr.sun_family = AF_UNIX;
-	strncpy(my_addr.sun_path, MY_SOCK_PATH,
-		sizeof(my_addr.sun_path) - 1);
+	// Clears structure, sets port and ip address
+	memset(&my_addr, 0, sizeof(struct sockaddr_in));
+	my_addr.sin_family = AF_INET;
+	my_addr.sin_addr.s_addr = inet_addr(ip);
+	my_addr.sin_port = htons(port);
+	//bzero(&my_addr,sizeof(my_addr));
+	//strncpy(my_addr.sin_path, MY_SOCK_PATH,sizeof(my_addr.sin_path) - 1);
+	memset(my_addr.sin_zero,'\0',sizeof my_addr.sin_zero);
+
+	//listens
+	if (listen(sfd,LISTEN_BACKLOG)==-1)
+		handle_error("Listen Error");
+	else
+		printf("Listening...\n");
 
 	// Creates communication channel
-	if (bind(sfd, (struct sockaddr *) &my_addr, sizeof(struct sockaddr_un)) == -1)
-		handle_error("bind");
-	
-	// Declares listening for incoming connections
-	if (listen(sfd, LISTEN_BACKLOG) == -1)
-		handle_error("listen");
+	if (bind(sfd, (struct sockaddr *) &my_addr, sizeof(struct sockaddr_in)) == -1)
+		handle_error("Bind Error");
+	else
+		printf("Binding...\n");
 
 	/* Now we can accept incoming connections one
 	 *  at a time using accept(2) */
-	peer_addr_size = sizeof(struct sockaddr_un);
+	peer_addr_size = sizeof(struct sockaddr_in);
 	char buf[50];
 
 	int firstAvailable;
@@ -121,7 +137,7 @@ int main(int argc, char *argv[]) {
 	
 		cfd = accept(sfd, (struct sockaddr *) &peer_addr, &peer_addr_size);
 		if (cfd == -1) {
-			handle_error("accept");
+			handle_error("Accept Error");
 
 		} else {
 			int i = 0;
@@ -129,11 +145,12 @@ int main(int argc, char *argv[]) {
 				if (!structArray[i].active) {
 					firstAvailable = i;
 					i = USER_COUNT+1;
+					printf("User successfully connected!\n");
 				}
 			}
 
 			if (i == USER_COUNT) {
-				printf("Max capacity. Refused connection with client.\n");
+				printf("Max capacity. Refused connection with user.\n");
 			} else {
 				structArray[firstAvailable].socket = cfd;
 				structArray[firstAvailable].active = 1;
@@ -143,6 +160,6 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	unlink(MY_SOCK_PATH);
-
+	//unlink(MY_SOCK_PATH);
+	unlink(my_addr);
 }
