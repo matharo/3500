@@ -11,7 +11,6 @@
 #include <arpa/inet.h>
 
 #define MY_SOCK_PATH "./local"
-#define LISTEN_BACKLOG 50
 #define user_Count 100
 #define handle_error(msg) \
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
@@ -19,7 +18,7 @@
 struct user_struct {
 	char message[1024];
 	char username[100];
-	int isactive;
+	int online;
 	int socket;
 	int user_slot;
 };
@@ -33,7 +32,7 @@ void *function(void *args) {
 	int quit = 0;
 
 	for (i = 0; i < user_Count; i++) {
-		if (userArray[i].isactive == 1 && i == new_client->user_slot) {
+		if (userArray[i].online == 1 && i == new_client->user_slot) {
 			char toSend[1024];
 			sprintf(new_client->username, "%s%d", "User", new_client->user_slot);
 			printf("%s has joined the server.\n", new_client->username);
@@ -45,7 +44,10 @@ void *function(void *args) {
 	while (1) {
 		int ret;
 		ret = read(new_client->socket, new_client->message, 1024);
-		if (ret == -1) { handle_error("Read"); break; }
+		if (ret == -1) { 
+			handle_error("Read Error"); 
+			break; 
+		}
 
 		if (strncmp(new_client->message, "quit\n", 5) == 0) {
 			sprintf(new_client->message, "%s", "has left.");
@@ -63,12 +65,12 @@ void *function(void *args) {
 		printf("%s\n", toSend);
 
 		for (i = 0; i < user_Count; i++) {
-			if (userArray[i].isactive == 1 && i != new_client->user_slot) {
+			if (userArray[i].online == 1 && i != new_client->user_slot) {
 				write(userArray[i].socket, toSend, 1024);
 			}
 		}
 		if (quit) {
-			new_client->isactive = 0;
+			new_client->online = 0;
 			pthread_exit(0);
 		}
 	}
@@ -78,74 +80,76 @@ int main(int argc, char *argv[])
 {
 	char buffer[50];
 	unlink(MY_SOCK_PATH);
-	int sfd, cfd, new_sfd;
-	struct sockaddr_un my_addr, peer_addr;
+	int servfd, clientfd, new_sfd;
+	struct sockaddr_in my_addr;
+	struct sockaddr_storage peer_addr;
 	socklen_t peer_addr_size;
 	pthread_t th_array[user_Count];
 
 	int port = atoi(argv[2]);
-	char* iP = argv[1];
-	printf("IP address is %s.\n", iP);
+	char* ip = argv[1];
+	printf("IP address is %s\n", ip);
 
 	//make the user active
 	int i;  //counter
 	for (i = 0; i < user_Count; i++)
 	{
-		userArray[i].isactive = 0;
+		userArray[i].online = 0;
 	}
 
-	sfd = socket(AF_UNIX, SOCK_STREAM, 0);   //for local
-	//sfd = socket(AF_NET, SOCK_STREAM | SOCK_NONBLOCK, 0);
+	//servfd = socket(AF_UNIX, SOCK_STREAM, 0);   //for local
+	//servfd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0); makes nonblocking, but cannot keep listening
+	servfd = socket(AF_INET,SOCK_STREAM,0);
+	if (servfd == -1)
+		handle_error("Socket Error");
 
-	if (sfd == -1)
-		handle_error("socket");
+	//my_addr.sun_family = AF_UNIX;   //for local access to server
+	//my_addr.sun_addr = inet_addr(ip);
+ 	my_addr.sin_family = AF_INET;
+	my_addr.sin_addr.s_addr = inet_addr(ip);
+	my_addr.sin_port = htons(port);
+	memset(my_addr.sin_zero,'\0',sizeof(my_addr.sin_zero));
+	//strncpy(my_addr.sun_path, MY_SOCK_PATH, sizeof(my_addr.sun_path) - 1); //for un
 
-	memset(&my_addr, 0, sizeof(struct sockaddr_un));
-	/* Clear structure */
-	my_addr.sun_family = AF_UNIX;   //for local access to server
- 	//my_addr.sin_family = AF_NET;
-	//my_addr.sin_addr = inet_addr(iP);
-	//my_addr.sun_addr.s_addr = inet_addr(iP);
-	//my_addr.sun_port = htons(port);
-	
-	strncpy(my_addr.sun_path, MY_SOCK_PATH, sizeof(my_addr.sun_path) - 1);
+	if (bind(servfd, (struct sockaddr *) &my_addr, sizeof(struct sockaddr_in)) == -1)
+		handle_error("Bind Error");
+	else
+		printf("Bind successful\n");
+	//listens for connections
+	if (listen(servfd, 50) == -1)
+		handle_error("Listen Error");
+	else
+		printf("Listening...\n");
 
-	if (bind(sfd, (struct sockaddr *) &my_addr, sizeof(struct sockaddr_un)) == -1)
-		handle_error("bind");  //2
-
-	if (listen(sfd, LISTEN_BACKLOG) == -1)
-		handle_error("listen");  //3
-			 /* Now we can accept incoming connections one at a time using accept(2) */
-	peer_addr_size = sizeof(struct sockaddr_un);
+	peer_addr_size = sizeof(peer_addr);
 
 	int available;
-
 	while (1) {
-		cfd = accept(sfd, (struct sockaddr *) &peer_addr, &peer_addr_size);  //4
-		if (cfd == -1) {
-			handle_error("accept");
+		//accepts client	
+		clientfd = accept(servfd, (struct sockaddr *) &peer_addr, &peer_addr_size); 
+		if (clientfd == -1) {
+			handle_error("Accept Error");
 		}
 		else {
-			int j = 0;
-			for (j; j < user_Count; j++) {
-				if (!userArray[j].isactive) {
+			int j;
+			for (j = 0; j < user_Count; j++) {
+				if (!userArray[j].online) {
 					available = j;
 					j = user_Count + 1;
 				}
 			}
 			if (j == user_Count) {
-				printf("Reached max capacity.\n");
+				printf("Reached user max capacity.\n");
 			}
 			else {
-				userArray[available].socket = cfd;
-				userArray[available].isactive = 1;
+				userArray[available].socket = clientfd;
+				userArray[available].online = 1;
 				userArray[available].user_slot = available;
 				pthread_create(&th_array[available], NULL, function, &userArray[available]);
 			}
 		}
 	}
-	/* When no longer required, the socket pathname, MY_SOCK_PAT
-	should be deleted using unlink(2) or remove(3) */
+	//deletes socket pathname, MY_SOCK_PATH
 	unlink(MY_SOCK_PATH);
 
 }

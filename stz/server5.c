@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <pthread.h>
+#include<pthread.h>
 //#define MY_SOCK_PATH "./local"
 #define LISTEN_BACKLOG 50
 #define USER_COUNT 100
@@ -52,7 +52,7 @@ void *handler(void *c) {
 
 		// Alters users message if 
 		if (strncmp(client->message,"quit\n", 5) == 0) {
-			sprintf(client->message, "%s", " has left.");
+			sprintf(client->message, "%s", "has left.");
 			quit = 1;
 		}
 
@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
 	printf("IP is %s, Port is %d\n",ip,port);
 
 	struct sockaddr_in my_addr, peer_addr;
-	socklen_t peer_addr_size,my_addr_size;
+	socklen_t peer_addr_size;
 	pthread_t threadArray[USER_COUNT];
 
 	// Initializing all userSlots as inactive
@@ -107,16 +107,13 @@ int main(int argc, char *argv[]) {
 		handle_error("socket");
 
 	// Clears structure, sets port and ip address
-	memset(&my_addr, 0, sizeof(my_addr));
+	memset(&my_addr, 0, sizeof(struct sockaddr_in));
 	my_addr.sin_family = AF_INET;
-	my_addr.sin_addr = inet_addr(ip);
-	//my_addr.sun_addr.s_addr = inet_addr(ip);
+	my_addr.sin_addr.s_addr = inet_addr(ip);
 	my_addr.sin_port = htons(port);
 	//bzero(&my_addr,sizeof(my_addr));
 	//strncpy(my_addr.sin_path, MY_SOCK_PATH,sizeof(my_addr.sin_path) - 1);
-	//memset(my_addr.sin_zero,'\0',sizeof my_addr.sin_zero);
-
-	my_addr_size = sizeof(my_addr);
+	memset(my_addr.sin_zero,'\0',sizeof my_addr.sin_zero);
 
 	//listens
 	if (listen(sfd,LISTEN_BACKLOG)==-1)
@@ -125,14 +122,10 @@ int main(int argc, char *argv[]) {
 		printf("Listening...\n");
 
 	// Creates communication channel
-	if (bind(sfd,(struct sockaddr *) &my_addr, my_addr_size) == -1)
+	if (bind(sfd, (struct sockaddr *) &my_addr, sizeof(struct sockaddr_in)) == -1)
 		handle_error("Bind Error");
 	else
-		printf("Binding...\nWaiting for a connection...\n");
-https://www.programminglogic.com/example-of-client-server-program-in-c-using-sockets-and-tcp/
-
-
-
+		printf("Binding...\n");
 
 	/* Now we can accept incoming connections one
 	 *  at a time using accept(2) */
