@@ -1,4 +1,7 @@
 //Lorna Xiao and Vyshnavee Reddlapalli
+//lab5 and studio25
+//server.c
+//implements: quit, ls, multiple clients, name
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -13,7 +16,7 @@
 #define num_user 50 
 #define handle_error(msg) \
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
-
+//defines user
 struct user_struct {
 	char message[1024];
 	char name[100];
@@ -21,15 +24,15 @@ struct user_struct {
 	int socket;
 	int slot;
 };
-
+//array holding all users
 struct user_struct userArray[num_user];
-
+//checker for when user is connected
 void *connectUser(void *args) {
 	struct user_struct *new_user = (struct user_struct*) args;
 	char send[1024];
 	int i;
 	int quit = 0;
-
+	//user joins server
 	for (i = 0; i < num_user; i++) {
 		if (userArray[i].online == 1 && i == new_user->slot) {
 			sprintf(new_user->name, "%s%d", "User", new_user->slot);
@@ -43,19 +46,28 @@ void *connectUser(void *args) {
 			handle_error("Read Error"); 
 			break; 
 		}
-
-		if ((strncmp(new_user->message, "quit\n", 5) == 0) ||
-			(strncmp(new_user->message,"^C\n",3)==0)){
+		//if type quit or ^C
+		if ((strncmp(new_user->message, "quit\n", 5) == 0) || (strncmp(new_user->message,"^C\n",3)==0)){
 			sprintf(new_user->message, "%s", "has left.");
 			quit = 1;
 		}
-		
+		//change name
 		if (strncmp(new_user->message, "name ", 5) == 0) {
 			char *tok = strtok(new_user->message, " \n");
 			tok = strtok(NULL, " \n");
 			strcpy(new_user->name, tok);
 			sprintf(new_user->message,"%s","changed their name.");
 		}
+		//display ls
+		if (strncmp(new_user->message,"ls\n",3)==0){
+			char buffer[1024];
+			FILE* file;
+                        file = popen("ls -l","r");
+			if (file == NULL) handle_error("Failed to run command\n");
+                        while(fgets(buffer,1024,file)!=NULL)
+				printf(buffer);
+			pclose(file);
+                }	
 		//prints out user name and message to server chat box
 		sprintf(send, "%s: %s\n", new_user->name, new_user->message);
 		printf("%s\n", send);

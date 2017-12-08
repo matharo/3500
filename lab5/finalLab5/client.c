@@ -1,4 +1,7 @@
 //Lorna Xiao and Vyshnavee Reddlapalli
+//lab5 and studio25
+//client.c
+//impleemnts name,quit,^C, ls, multiple clients
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +16,6 @@
 struct sock {
 	int socket;
 };
-
 void *thread_entry(void *args) {
 	while (1) {
 		struct sock *sock_ptr = (struct sock*) args;
@@ -33,12 +35,14 @@ int main(int argc, char *argv[]) {
 	struct sockaddr_in my_addr;
 	socklen_t addr_size = sizeof(struct sockaddr);
 
+	//reads in from terminal
 	printf("IP address is %s, port is %d\n",ipaddr,port);
 	
 	clientfd = socket(AF_INET, SOCK_STREAM, 0);   //1
 	if (clientfd == -1)
 		handle_error("socket error");
 
+	//intialize ip and port
 	my_addr.sin_family = AF_INET;
 	my_addr.sin_addr.s_addr = inet_addr(ipaddr);
 	my_addr.sin_port = htons(port);
@@ -50,12 +54,14 @@ int main(int argc, char *argv[]) {
 	else
 		printf("connected successfully\n");
 
+	//creates thread of clients
 	pthread_t thread;
 	struct sock sock_connect;
 	sock_connect.socket = clientfd;
 	
 	pthread_create(&thread, NULL, thread_entry, &sock_connect);
 
+	//allows user to type into chat and send text to server
 	int ret;
 	ret = read(stdin, buffer, 50);
 	while(1){
@@ -64,8 +70,5 @@ int main(int argc, char *argv[]) {
 		write(clientfd,(void*)buffer,50);
 		if (strncmp(buffer,"quit\n",5)==0 || strncmp(buffer,"^C\n",3)==0)
 			break;
-		
 	}
-
-	return 0;
 }
