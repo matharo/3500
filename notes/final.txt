@@ -1,0 +1,58 @@
+Major topics:
+
+-process abstraction
+-memory abstraction
+^^ abstraction: make it look like current program is isolated
+	program doesn't need to worry about OS, hardware
+
+-OS mechanism
+	system calls
+	threads - concurrency 
+	paging
+-File Systems
+-Networking
+
+-Virtual memory
+	single program contiguous allocation
+	base + limit 
+		enforce security protections, programs cannot read/write outside of their allocated space
+	^^ both, problems: fragmentation, scheduling?-where put things
+
+	paging, memory divided into equal size pages
+		TLB, page replacement algorithms
+		what does memory look like?
+		1GB memory, 1kb page size, how much space?
+			process space 4kb, how many pages for that?
+		virtual vs phys address, converting?
+
+File Systems
+-files	inodes, fat table
+	ways to store files?
+	linked list allocation
+	contiguous 
+	directories, form of files (table/tree)
+		uses inodes instead of blocks on harddrive
+		refers to other inodes
+
+Networking
+-7 layer model (OSI)
+	know what goes where?
+	where things fall inside each layer
+-sockets, socket programming
+	know how they work
+	write network program with sockets, think of problems from lab5
+		sockets are blocking
+		networks are asynchronous
+			workaround blocking behavior?
+			use threads to make asynchrony, but make sockets nonblocking
+
+Security
+-CIA + others
+-privacy
+-encryption authentification, major security in todays world
+-building secure systems, trusted computing
+-permissions domains, permissions models
+	can guarantee strong secrecy
+		eg military, if general creates secret document, can prevent flow from high rank to low rank
+-need balance between more important aspects
+	high security, low security, targets

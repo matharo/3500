@@ -1,0 +1,35 @@
+2)
+how many page frames?
+2^21/2^11 = 2^10 = 1024 page frames
+
+how many pages can each process access?
+2^21 bytes/2^11 bytes/page = 2^10 pages
+
+suppose process accesses virt. addr 9000
+what page does this access, what offset?
+
+page size = 2048
+page 0 = 0-2047
+page 1 = 2048-4095
+page 2 = 4096-6143
+page 3 = 6144-8191
+page 4 = 8192-10239
+
+it access page 4, offset = 808
+
+
+3)
+
+better way to implement
+both go one place, organize/sort messages based on urgency
+
+solve problems? no
+bad thing can happen: messages can get stuck, can still interfere
+	need to wait between urgent and non urgent
+
+multiple threads
+2 threads, one nonurgent one urgent
+have any delays be passed on and handled by other thread
+
+5)
+

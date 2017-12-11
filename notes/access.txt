@@ -1,0 +1,80 @@
+principle of least access: always execute in the domain with least privileges necessary to complete work
+	there are many ways of managing access, btu this is the key concept that underlies all of them
+
+3 types of access control policies
+1. discretionary access control
+	most common in modern OS
+	based on subject's identity combined with access rights stating what each subject is allowed to do
+	ex. home directory, u have access to it but no one else does
+	discretionary: entity can be given access rights, can allow another subject to give access rights
+		if you have privileges to a file -> you can give to someone else
+		you own the file, have discretionary as to who can access it
+	need entry per file and per subject
+
+	implementation: matrices are sparce bc many files/users
+		option1: access control lists, each file stores a list of user access entries
+		option2: capability lists: each user has list of objects along with access rights
+
+		never store home matrix bc too many objects
+
+	linux security model: people/processes with 'root' privilges can do anything, other accounts do less
+		attackers want root privileges = can hide/erase anything
+		can run robust secure linux systems but discretionary access controls (DAC) <= problem
+		kernel: allows/deny access to file
+
+	how to change roles in DAC
+		setuid bit means program "runs as" owner, no matter who executes it
+		setgid bit means run as member of group
+		^^ dangerous, don't want to run everything and not on their actual privileges 'root' owner
+
+	main thing: if own file = have complete ownership
+		if set read/write/exe to other people = they can grant others access and change file
+
+2. mandatory access control
+	MAC models focus on protecting information and classification levels
+		ex. top secret, secret, classified
+	assumes a partially ordered set on levels:
+		ex: <= but 2 things might not be comparable, but have a comparison where classfications rank above and below= hierarchy
+	simple security process: a user u can read a object o on if o<= u, user classification must be higher than object classfication
+	can only edit/create an object if u<=o, do not want object classfication to be below = can be seen by others, low level security
+	protects from leaking information
+
+	blp	no read up, no write down
+
+	biba model: addresses integrity than confidentiality
+		should not be allowed to write something of higher level
+		higher level = more likely be secure
+		opposite to blp , no write up, no read down, want keep data secure
+			data center less likely get compromised than laptop
+
+	blp vs biba = blp protect confidentiality of data, biba is worried about integrity
+		highest level integrity = system, OS
+
+	only use of MAC in windows: high-admin, med - avg user, low - guest account
+
+3. role based access control
+	only used in certain places, ex. doctors office
+		doctor has access to all, but based on what role currently = shouldn't not have all access
+		such as when signed in or signed out
+
+	advantage: no matter which access control framework you use to store rights, total number of of rules tends to be reduced
+		total number of roles is generally smaller than the number of useres
+		overhead is smaller, since lookup tables are smaller
+	disadvantage: new and not widely used
+		built into windows 7
+
+terminology:
+	subject = process or user
+	object = resources, file, printer, keyboard, screen, can be changed by system
+	access rights: describe ways in which subjects may interact with objects
+	3 classes: owner, group, world, which subjects may belong to
+
+in linux, everything is a file, I/O devices, other special files = pipes
+users and groups != files, someone capable of using files, groups = lists of user accounts
+directory permissions: read = list contents, write = create/delete files in dir, execute = use anything in or change working directory to this directory
+
+sticky bit: originally used to lock file in memory so it would load more quickly, avoided disk access
+	now used on directories to limit ability to delete
+	if sticky bit = set, must be owner of file or directory to delete it, other users cannot delete
+
+	
