@@ -1,52 +1,55 @@
+//Lorna Xiaoq
+//Studio 24, server.c
+//Received source and code from https://vcansimplify.wordpress.com/2013/03/14/c-socket-tutorial-echo-server/
+
+#include <sys/types.h>
 #include <sys/socket.h>
-#include <sys/un.h>
+#include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+ 
+int main(){
+    char str[100];
+    int listen_fd, client_fd;	//listen is for server
 
-#define MY_SOCK_PATH "./somepath"
-#define LISTEN_BACKLOG 50
+    struct sockaddr_in servaddr;
+    struct sockaddr_storage storaddr;
+    socklen_t storsize;
 
-       #define handle_error(msg) \
-           do { perror(msg); exit(EXIT_FAILURE); } while (0)
+    listen_fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (listen_fd == -1) { perror("Socket error"); exit(EXIT_FAILURE);}
+	
+    bzero( &servaddr, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htons(INADDR_ANY);
+    servaddr.sin_port = htons(22000);
+  
+    if (bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr)) == -1){
+	    perror("Unable to bind\n");
+	    exit(EXIT_FAILURE);
+    }
+    if(listen(listen_fd, 10) == -1){
+	    perror("Unable to connect to server\n");
+	    exit(EXIT_FAILURE);
+    }
+    else{
+    	printf("Listening for connections....\n");
+    }
 
-       int
-       main(int argc, char *argv[])
-       {
-           int sfd, cfd;
-           struct sockaddr_un my_addr, peer_addr;
-           socklen_t peer_addr_size;
+    storsize = sizeof(struct sockaddr_in);
 
-           sfd = socket(AF_UNIX, SOCK_STREAM, 0);
-
-if (sfd == -1)
-               handle_error("socket");
-
-           memset(&my_addr, 0, sizeof(struct sockaddr_un));
-                               /* Clear structure */
-           my_addr.sun_family = AF_UNIX;
-           strncpy(my_addr.sun_path, MY_SOCK_PATH,
-                   sizeof(my_addr.sun_path) - 1);
-
-           if (bind(sfd, (struct sockaddr *) &my_addr,
-                   sizeof(struct sockaddr_un)) == -1)
-               handle_error("bind");
-
-           if (listen(sfd, LISTEN_BACKLOG) == -1)
-               handle_error("listen");
-
-           /* Now we can accept incoming connections one
- *               at a time using accept(2) */
-
-           peer_addr_size = sizeof(struct sockaddr_un);
-
-	cfd = accept(sfd, (struct sockaddr *) &peer_addr,
-                        &peer_addr_size);
-           if (cfd == -1)
-               handle_error("accept");
-
-           /* Code to deal with incoming connection(s)... */
-
-           /* When no longer required, the socket pathname, MY_SOCK_PATH
- *               should be deleted using unlink(2) or remove(3) */
+    while(1)
+    {
+	client_fd = accept(listen_fd, (struct sockaddr*) &storaddr, &storsize);
+        bzero( str, 100);	//clears str
+        read(client_fd,str,100);	//read up to 100 bytes into str
+        fopen(str,NULL);
+	//if (strncmp(str,"quit\n",5)==0 || strncmp(str,"^C\n",3)==0)
+		//shutdown(client_fd,SHUT_RDWR);
+	//	break;
+	write(client_fd, str, strlen(str)+1);	//send back str
+   }
 }
+

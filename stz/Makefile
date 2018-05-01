@@ -1,3 +1,3 @@
 all:
-	gcc serverin.c -o server -pthread
-	gcc clientin.c -o client -pthread
+	gcc server2.c -o server -pthread
+	gcc client2.c -o client -pthread
