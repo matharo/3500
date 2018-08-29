@@ -1,8 +1,3 @@
-//Tanmayi Nagasuri
-//CSCI 3500
-//27 January 2017
-
-
 #include <stdio.h>
 #include <rpc/des_crypt.h>
 #include <unistd.h>
